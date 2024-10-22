@@ -8,10 +8,6 @@ import matplotlib.pyplot as plt
 import time
 import psutil
 
-
-train_data, train_label, test_data, test_label = split_data(data_path="../dataset/face.mat")
-mean_face = np.mean(train_data, axis=1).reshape(-1, 1)
-
 def memory_usage(message=''):
     # current process RAM usage
     p = psutil.Process()
@@ -115,19 +111,23 @@ def knn_classifier(train_data, train_label, test_data, k=5, M=100):
     return test_pred
 
 
+if __name__ == "__main__":
+    train_data, train_label, test_data, test_label = split_data(data_path="../dataset/face.mat")
+    mean_face = np.mean(train_data, axis=1).reshape(-1, 1)
 
-# # mean face reconstruction
-# mean_face_reconstruction(mean_face)
+    # # mean face reconstruction
+    # mean_face_reconstruction(mean_face)
 
-# # visualize PCA eigen values that are larger than 1
-# val, vec = pca(train_data, mean_face)
-# plot_eig_val(val[val > 1])
+    # # visualize PCA eigen values that are larger than 1
+    # val, vec = pca(train_data[:, :104], mean_face)
+    # print(val[:50])
+    # plot_eig_val(val[val > 1])
 
-# # reconstruct data based on pca using train data
-# te, re = face_reconstruction(test_data)
-# print(te, re)
+    # # reconstruct data based on pca using train data
+    # te, re = face_reconstruction(test_data)
+    # print(te, re)
 
-# # knn classifier
-# test_pred = knn_classifier(train_data, train_label, test_data)
-# accuracy = np.mean(test_pred == test_label)
-# print(accuracy)
+    # # knn classifier
+    #test_pred = knn_classifier(train_data, train_label, test_data, M=50)
+    #accuracy = np.mean(test_pred == test_label)
+    #print(accuracy)
