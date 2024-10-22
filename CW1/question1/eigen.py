@@ -40,8 +40,8 @@ def pca(A, mean_A, low=True):
     vec = vec[:, idx]
 
     end = time.time()
-    print(f"{end - start: .5f} sec")
-    memory_usage(message='pca')
+    # print(f"{end - start: .5f} sec")
+    # memory_usage(message='pca')
 
     return val, vec
 
