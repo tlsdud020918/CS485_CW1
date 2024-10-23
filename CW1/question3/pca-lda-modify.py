@@ -87,13 +87,24 @@ def training_data_rs(data, T, subset_rate = 0.75):
     
     return sample
 
-
+"""
+optimization 
+1. mpca, n_nearest 먼저 고정하기, Q1 실험에서 결정
+2. mlda 고정: ensemble 전 그냥 pca-lda에서 결정
+3. bagging subset rate, m0, model_num 고정: ensemble에서만 있는 변수
+"""
 if __name__ == "__main__":
     train_data, train_label, test_data, test_label = split_data(data_path="../dataset/face.mat") # D * N
     mean_face = np.mean(train_data, axis=1).reshape(-1, 1)
 
+    mpca = 200
+    m0 = int(mpca * 0.5)
+    mlda = 25
+    n_nearest = 5
+    model_num = 5
+
     # pca-lda classifier
-    test_pred = pca_lda_classifier(train_data, train_label, mean_face, test_data, Mpca=50, Mlda=10, knn=5)
+    test_pred = pca_lda_classifier(train_data, train_label, mean_face, test_data, Mpca=mpca, Mlda=mlda, knn=n_nearest)
     accuracy = np.mean(test_pred == test_label)
     print(accuracy)
     print(test_pred)
@@ -101,16 +112,17 @@ if __name__ == "__main__":
     # pca-lda ensemble
     ensemble_test_pred = []
 
-    train_data_rs = training_data_rs(train_data, 8, subset_rate = 0.75) # training data random sampling, 8 times
+    train_data_rs = training_data_rs(train_data, model_num, subset_rate = 0.7) # training data random sampling, 8 times
     for dataset in train_data_rs:
         sample_mean = np.mean(dataset[0], axis=1).reshape(-1, 1)
-        ensemble_test_pred.append(pca_lda_classifier(dataset[0], dataset[1], sample_mean, test_data, Mpca=150, Mlda=50))
+        ensemble_test_pred.append(pca_lda_classifier(dataset[0], dataset[1], sample_mean, test_data, Mpca=mpca, Mlda=mlda))
 
-    for i in range(8): # feature space random sampling, 8 times
-        ensemble_test_pred.append(pca_lda_classifier(train_data, train_label, mean_face, test_data, Mpca=150, M0=145, Mlda=50, rs=True))
+    for i in range(model_num): # feature space random sampling, model_num times
+        ensemble_test_pred.append(pca_lda_classifier(train_data, train_label, mean_face, test_data, Mpca=mpca, M0=m0, Mlda=mlda, rs=True))
 
     ensemble_test_pred = mode(ensemble_test_pred, axis=0, keepdims=True).mode.flatten()
     ensemble_accuracy = np.mean(ensemble_test_pred == test_label)
     print(ensemble_accuracy)
+    print(ensemble_test_pred)
 
 
