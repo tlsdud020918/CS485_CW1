@@ -59,8 +59,8 @@ if __name__ == "__main__":
     data_path = "../dataset/face.mat"
     train_data, train_label, test_data, test_label = data.split_data(data_path)
 
-    m_pca = 50
-    m_lda = 10
+    m_pca = 150
+    m_lda = 50
     n_neighbors = 5
 
     #pca_lib (m_pca, n_neighbors)

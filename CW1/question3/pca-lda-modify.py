@@ -97,11 +97,11 @@ if __name__ == "__main__":
     train_data, train_label, test_data, test_label = split_data(data_path="../dataset/face.mat") # D * N
     mean_face = np.mean(train_data, axis=1).reshape(-1, 1)
 
-    mpca = 200
-    m0 = int(mpca * 0.5)
-    mlda = 25
+    mpca = 150
+    m0 = 145
+    mlda = 50
     n_nearest = 5
-    model_num = 5
+    model_num = 8
 
     # pca-lda classifier
     test_pred = pca_lda_classifier(train_data, train_label, mean_face, test_data, Mpca=mpca, Mlda=mlda, knn=n_nearest)

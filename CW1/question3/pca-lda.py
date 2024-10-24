@@ -5,14 +5,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))) 
 from dataset.data import split_data
 from question1.eigen import pca, knn_classifier
 import numpy as np
-# from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier
 import random
 from scipy.stats import mode
 import matplotlib.pyplot as plt
-
-
-train_data, train_label, test_data, test_label = split_data(data_path="../dataset/face.mat") # D * N
-mean_face = np.mean(train_data, axis=1).reshape(-1, 1)
 
 def pca_projection(base, mean, data, M=50, M0=30, rs=False):
     eig_val, eig_vec = pca(base, mean)
@@ -31,12 +27,6 @@ def pca_projection(base, mean, data, M=50, M0=30, rs=False):
     else:
         return projected_data.T # D * N
 
-# project to N-1 dim
-N = train_data.shape[1]
-projected_train = pca_projection(train_data, mean_face, train_data, M=N-1)
-projected_test = pca_projection(train_data, mean_face, test_data, M=N-1)
-projected_mean = np.mean(projected_train, axis=1).reshape(-1, 1)
-
 def lda(data, label):
     mean_data = np.mean(data, axis=1).reshape(-1, 1)
 
@@ -48,10 +38,13 @@ def lda(data, label):
         n_c = data_c.shape[1]
         mean_c = np.mean(data_c, axis=1).reshape(-1, 1)
 
-        Sw += (1/n_c) * (data_c - mean_c) @ (data_c - mean_c).T
-        Sb += n_c * (mean_c - mean_data) @ (mean_c - mean_data).T
+        Sw += (data_c - mean_c) @ (data_c - mean_c).T
+        Sb += (mean_c - mean_data) @ (mean_c - mean_data).T
     
     val, vec = np.linalg.eig(np.linalg.inv(Sw)@Sb)
+    val = val.real
+    vec = vec.real
+
     idx = val.argsort()[::-1]
     val = val[idx]
     vec = vec[:, idx]
@@ -64,9 +57,6 @@ def lda(data, label):
 def lda_projection(base, base_label, data, M=30):
     eig_val, eig_vec = lda(base.astype(np.float64), base_label.astype(np.uint8))
     projected_data = data.T @ eig_vec[:, :M]
-
-    # U = lda(data, label)
-    # projected_data = data.T @ U[:, :M]
 
     return projected_data # N * D where D = M
 
@@ -86,7 +76,7 @@ def knn_classifier(train_data, train_label, test_data, k=5):
     return test_pred
 
 
-def pca_lda_classifier(train_data, train_label, mean, test_data, Mpca=335, M0=300, Mlda=65, rs=False):
+def pca_lda_classifier(train_data, train_label, mean, test_data, Mpca=335, M0=300, Mlda=51, knn=5, rs=False):
     if rs:
         train_pca_projected, basis, mean = pca_projection(train_data, mean, train_data, Mpca, M0, rs)
         train_lda_projected = lda_projection(train_pca_projected, train_label, train_pca_projected, Mlda)
@@ -98,12 +88,18 @@ def pca_lda_classifier(train_data, train_label, mean, test_data, Mpca=335, M0=30
         test_pca_projected = pca_projection(train_data, mean, test_data, M=Mpca)
         test_lda_projected = lda_projection(train_pca_projected, train_label, test_pca_projected, Mlda)
 
+
     test_pred = knn_classifier(train_lda_projected, train_label, test_lda_projected)
 
+    # Alternative: utilize KNN library
+    #model = KNeighborsClassifier(n_neighbors=knn)
+    #model.fit(train_lda_projected, train_label)
+    #test_pred = model.predict(test_lda_projected)
+    
     return test_pred
 
-def training_data_rs(T, subset_rate = 0.75):
-    num_total = projected_train.shape[1]
+def training_data_rs(data, T, subset_rate = 0.75):
+    num_total = data.shape[1]
     step = num_total//52
     
     sample = []
@@ -114,33 +110,42 @@ def training_data_rs(T, subset_rate = 0.75):
             sample_idx+=idx
 
         sample_idx = sorted(sample_idx)
-        sample_data = projected_train[:, sample_idx]
+        sample_data = data[:, sample_idx]
         sample_label = train_label[sample_idx]
         sample.append([sample_data, sample_label])
     
     return sample
 
 
+if __name__ == "__main__":
+    train_data, train_label, test_data, test_label = split_data(data_path="../dataset/face.mat") # D * N
+    mean_face = np.mean(train_data, axis=1).reshape(-1, 1)
 
-# ### pca-lda classifier
-# test_pred = pca_lda_classifier(train_data, train_label, mean_face, test_data)
-# accuracy = np.mean(test_pred == test_label)
-# print(accuracy)
+    # project to N-1 dim
+    #N = train_data.shape[1]
+    #projected_train = pca_projection(train_data, mean_face, train_data, M=N-1)
+    #projected_test = pca_projection(train_data, mean_face, test_data, M=N-1)
+    #projected_mean = np.mean(projected_train, axis=1).reshape(-1, 1)
 
-# ### pca-lda ensemble
-# ensemble_test_pred = []
+    # ### pca-lda classifier
+    test_pred = pca_lda_classifier(train_data, train_label, mean_face, test_data, Mpca=150, Mlda=50, knn=5)
+    accuracy = np.mean(test_pred == test_label)
+    print(accuracy)
 
-# train_data_rs = training_data_rs(8, subset_rate = 0.75) # training data random sampling, 8 times
-# for dataset in train_data_rs:
-#     sample_mean = np.mean(dataset[0], axis=1).reshape(-1, 1)
-#     ensemble_test_pred.append(pca_lda_classifier(dataset[0], dataset[1], sample_mean, projected_test, Mpca=150, Mlda=50))
+    # ### pca-lda ensemble
+    ensemble_test_pred = []
 
-# for i in range(8): # feature space random sampling, 8 times
-#     ensemble_test_pred.append(pca_lda_classifier(projected_train, train_label, projected_mean, projected_test, Mpca=150, M0=145, Mlda=50, rs=True))
+    train_data_rs = training_data_rs(train_data, 8, subset_rate = 0.5) # training data random sampling, 8 times
+    for dataset in train_data_rs:
+        sample_mean = np.mean(dataset[0], axis=1).reshape(-1, 1)
+        ensemble_test_pred.append(pca_lda_classifier(dataset[0], dataset[1], sample_mean, test_data, Mpca=150, Mlda=50))
 
-# ensemble_test_pred = mode(ensemble_test_pred, axis=0, keepdims=True).mode.flatten()
-# ensemble_accuracy = np.mean(ensemble_test_pred == test_label)
-# print(ensemble_accuracy)
+    for i in range(8): # feature space random sampling, 8 times
+        ensemble_test_pred.append(pca_lda_classifier(train_data, train_label, mean_face, test_data, Mpca=150, M0=145, Mlda=50, rs=True))
+
+    ensemble_test_pred = mode(ensemble_test_pred, axis=0, keepdims=True).mode.flatten()
+    ensemble_accuracy = np.mean(ensemble_test_pred == test_label)
+    print(ensemble_accuracy)
 
 
 
