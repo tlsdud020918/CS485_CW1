@@ -12,44 +12,41 @@ from question1 import eigen
 
 def memory_usage(message: str = 'debug'):
     # current process RAM usage
-    process = psutil.Process()
-    mem_info = process.memory_info()
-    print(f'{message}: {mem_info.rss / 1024 ** 2:.2f} MB')
+    p = psutil.Process()
+    rss = p.memory_info().rss / 2 ** 20 # Bytes to MB
+    print(f"[{message}] memory usage: {rss: 10.5f} MB")
+    return rss
 
 def gram_schmidt(mat1, mat2):
-    result = np.zeros((mat1.shape[0], mat1.shape[1]+mat2.shape[1]))
-    result[:, mat2.shape[1]:] = mat1
-
-    for i in range(mat2.shape[1]): 
-        vec = mat2[:, i]
-        for j in range(mat1.shape[1]):  
-            mat1_vec = mat1[:, j]
-            projection = np.dot(mat1_vec, vec) / np.dot(mat1_vec, mat1_vec) * mat1_vec
-            vec = vec - projection
-        
-        result[:, i] = vec
+    q, _ = np.linalg.qr(np.hstack((mat1, mat2)))
+    phi = q[:, :mat1.shape[1] + mat2.shape[1]]
     
-    for i in range(mat2.shape[1]):
-        norm = np.linalg.norm(result[:, i])
-        if norm > 0:
-            result[:, i] /= norm
-    
-    return result
+    return phi
 
 def batch_preprocessing(batch, batch_mean, n_components):
     eigenval, eigenvec = eigen.pca(batch, batch_mean)
-    return np.diag(eigenval[:n_components]), eigenvec[:, :n_components]
+    return eigenval[:n_components], eigenvec[:, :n_components]
 
 class IncrementalPCA:
-    def __init__(self, n_components):
+    def __init__(self, n_components, check_performance = False, step_save = False):
         self.n_components = n_components
         self.n_samples = 0 # mu
         self.mean = None # N3
         self.eigenvec = None # P3
         self.eigenval = None # Λ3
+        self.check_performance = check_performance
+        self.step_save = step_save
+        if (check_performance == True):
+            self.new_batch_t = []
+            self.new_batch_m = []
+            self.combine_t = []
+            self.combine_m = []
+        if (step_save == True):
+            self.step_mean = []
+            self.step_eigenvec = []
+            self.step_eigenval = []
 
     def partial_fit(self, batch):
-        start = time.time()
         # preprocessing new batch, set variables
         N1 = self.n_samples
         N2 = batch.shape[1]
@@ -58,8 +55,9 @@ class IncrementalPCA:
         mu1 = self.mean
         mu2 = np.mean(batch, axis=1).reshape(-1, 1)
 
+        start = time.time()
         V2, P2 = batch_preprocessing(batch, mu2, self.n_components)
-
+        end = time.time()
         # ---------------------------- first batch exception ----------------------------
         if self.mean is None:
             self.n_samples = N2
@@ -67,24 +65,37 @@ class IncrementalPCA:
             self.eigenvec = P2
             self.eigenval = V2
 
-            print(f"New batch eigen decomposition time: {time.time() - start:.5f} sec")
-            memory_usage(message='incremental_pca_eigen_decomposition')
-
+            if self.check_performance:
+                t = end - start
+                print(f"New batch eigen decomposition time: {t:.5f} sec")
+                mem = memory_usage(message='incremental_pca_eigen_decomposition')
+                self.new_batch_t.append(t)
+                self.new_batch_m.append(mem)
+                self.combine_t.append(0.0)
+                self.combine_m.append(0.0)
+            if self.step_save:
+                self.step_mean.append(self.mean)
+                self.step_eigenvec.append(self.eigenvec)
+                self.step_eigenval.append(self.eigenval)
             return
         #--------------------------- first batch exception end ----------------------------
 
         V1 = self.eigenval
         P1 = self.eigenvec
 
-        S1 = P1 @ V1 @ P1.T
-        S2 = P2 @ V2 @ P2.T
+        S1 = P1 @ np.diag(V1) @ P1.T
+        S2 = P2 @ np.diag(V2) @ P2.T
 
-        print(f"New batch eigen decomposition time: {time.time() - start:.5f} sec")
-        memory_usage(message='incremental_pca_eigen_decomposition')
+        if self.check_performance:
+            t = end - start
+            print(f"New batch eigen decomposition time: {t:.5f} sec")
+            mem = memory_usage(message='incremental_pca_eigen_decomposition')
+            self.new_batch_t.append(t)
+            self.new_batch_m.append(mem)
 
         # ---------------------------- start combining ----------------------------
         # 1. combined mean mu3
-        mu3 = (N1 * mu2 + N2 * mu2) / (N1+N2)
+        mu3 = (N1 * mu1 + N2 * mu2) / (N1+N2)
 
         # 2. combined covariance matrix S3
         temp = mu1 - mu2
@@ -100,17 +111,29 @@ class IncrementalPCA:
         val = val[idx]
         vec = vec[:, idx]
 
-        V3 = np.diag(val[:self.n_components])
+        V3 = val[:self.n_components]
         P3 = phi @ vec[:,:self.n_components]
 
         end = time.time()
-        print(f"combined covariance matrix decomposition time: {end - start:.5f} sec")
+
+        if self.check_performance:
+            t = end - start
+            print(f"combined covariance matrix decomposition time: {t:.5f} sec")
+            mem = memory_usage(message='incremental_pca_eigen_decomposition')
+            self.combine_t.append(t)
+            self.combine_m.append(mem)
         
         # update self varialbles 
         self.n_samples = N3
         self.mean = mu3
         self.eigenvec = P3
         self.eigenval = V3
+
+        if self.step_save:
+            self.step_mean.append(self.mean)
+            self.step_eigenvec.append(self.eigenvec)
+            self.step_eigenval.append(self.eigenval)
+
         print("result shape: ", P3.shape, V3.shape)
 
     def fit(self, A, batch_size):

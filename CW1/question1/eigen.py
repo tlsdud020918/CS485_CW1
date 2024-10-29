@@ -13,10 +13,10 @@ def memory_usage(message=''):
     p = psutil.Process()
     rss = p.memory_info().rss / 2 ** 20 # Bytes to MB
     print(f"[{message}] memory usage: {rss: 10.5f} MB")
+    return rss
 
 def pca(A, mean_A, low=True):
-    start = time.time()
-
+    #start = time.time()
     total_num = A.shape[1]
     A = A - mean_A
 
@@ -38,7 +38,7 @@ def pca(A, mean_A, low=True):
     val = val[idx]
     vec = vec[:, idx]
 
-    end = time.time()
+    #end = time.time()
     # print(f"{end - start: .5f} sec")
     # memory_usage(message='pca')
 
@@ -62,6 +62,13 @@ def plot_eig_val(val):
     plt.ylabel('eigen value')
     plt.title('Eigen Values')
     plt.show()
+
+def pca_transform (data, eig_val, eig_vec, mean_face, M=50):
+    centered_data = data - mean_face
+    projected_data = eig_vec[:, :M].T @ centered_data
+
+    # projected data = D' * N
+    return projected_data
 
 def face_reconstruction(data, eig_val, eig_vec, mean_face, M=50, isshow=False):
     centered_data = data - mean_face
@@ -119,6 +126,26 @@ def knn_classifier(train_data, train_label, test_data, k=5, M=100):
     
     return test_pred
 
+def pca_perf(A, mean_A):
+    start = time.time()
+    total_num = A.shape[1]
+    A = A - mean_A
+
+    S = (A.T@A) / total_num
+    val, vec = np.linalg.eig(S)
+    vec = A@vec
+    vec = vec / np.linalg.norm(vec, axis=0)
+
+    # sort eigenvalues in descent order
+    idx = np.argsort(val)[::-1]
+    val = val[idx]
+    vec = vec[:, idx]
+    end = time.time()
+
+    print(f"{end - start: .5f} sec")
+    mem = memory_usage(message='pca')
+    
+    return val, vec, (end-start), mem
 
 if __name__ == "__main__":
     train_data, train_label, test_data, test_label = split_data(data_path="../dataset/face.mat")

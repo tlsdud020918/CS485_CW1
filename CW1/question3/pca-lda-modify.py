@@ -107,7 +107,7 @@ if __name__ == "__main__":
     test_pred = pca_lda_classifier(train_data, train_label, mean_face, test_data, Mpca=mpca, Mlda=mlda, knn=n_nearest)
     accuracy = np.mean(test_pred == test_label)
     print(accuracy)
-    print(test_pred)
+    #print(test_pred)
 
     # pca-lda ensemble
     ensemble_test_pred = []
@@ -123,6 +123,6 @@ if __name__ == "__main__":
     ensemble_test_pred = mode(ensemble_test_pred, axis=0, keepdims=True).mode.flatten()
     ensemble_accuracy = np.mean(ensemble_test_pred == test_label)
     print(ensemble_accuracy)
-    print(ensemble_test_pred)
+    #print(ensemble_test_pred)
 
 
