@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./CW1/question5/randomforest-python"
+    ]
+}
