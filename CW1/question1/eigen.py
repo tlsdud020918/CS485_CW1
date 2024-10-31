@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))) # set absolute path for importing split_data
 
-from dataset.data_static import split_data
+from dataset.data import split_data
 import numpy as np
 import matplotlib.pyplot as plt
 import time
