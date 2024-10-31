@@ -27,7 +27,7 @@ def pca_projection(base, mean, data, M=50, M0=30, rs=False):
     else:
         return projected_data.T # D * N
 
-def lda(data, label):
+def lda(data, label, scatter=False):
     mean_data = np.mean(data, axis=1).reshape(-1, 1)
 
     Sw = np.zeros((data.shape[0], data.shape[0]))
@@ -40,6 +40,9 @@ def lda(data, label):
 
         Sw += (data_c - mean_c) @ (data_c - mean_c).T
         Sb += (mean_c - mean_data) @ (mean_c - mean_data).T
+
+    if scatter==True:
+        return np.linalg.matrix_rank(Sw), np.linalg.matrix_rank(Sb)
     
     val, vec = np.linalg.eig(np.linalg.inv(Sw)@Sb)
     val = val.real
