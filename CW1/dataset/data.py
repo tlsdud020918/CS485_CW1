@@ -33,5 +33,7 @@ def split_data(data_path="./face.mat", train_rate=0.8):
 
     return train_data, train_label, test_data, test_label
 
-# train_data, train_label, test_data, test_label = split_data()
-# print(test_label)
+if __name__ == "__main__":
+    train_data, train_label, test_data, test_label = split_data()
+    # print(test_label)
+    io.savemat('face_split.mat', {'train_X': train_data, 'train_L': train_label, 'test_X': test_data, 'test_L': test_label})
