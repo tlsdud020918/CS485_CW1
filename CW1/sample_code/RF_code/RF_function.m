@@ -1,4 +1,4 @@
-function [accuracy, test_result, time] = RF_function(num_trees, depth_trees, splitnum, weaklearner, conf_mtx)
+function [accuracy, train_time, test_time, test_result] = RF_function(num_trees, depth_trees, splitnum, weaklearner, conf_mtx)
 
 param.num = num_trees;
 param.depth = depth_trees;    % trees depth
@@ -21,6 +21,7 @@ data_test = cat(2, transpose(test_X), transpose(test_L));
 tic;
 trees = growTrees(data_train, param);
 train_time = toc;
+fprintf('Training tree end')
 
 % Test Random Forest
 tic;
