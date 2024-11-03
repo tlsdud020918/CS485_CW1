@@ -1,34 +1,30 @@
-\section{Appendix}
-
-\subsection{Mean face}
-\begin{figure}
+\section{Mean face}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.4\linewidth]{image/q1_meanface.png} % Seems better to move to Appendix,,
-	
+	\includegraphics[width=0.4\linewidth]{image/q1_meanface.png} 
 	\caption{Mean face of training data}
 	\label{fig:q1_meanface}
 \end{figure}
 
-\subsection{Confusion matrix}
-\begin{figure}
+\section{Confusion matrix}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.4\linewidth]{image/q1_cm.png} % Seems better to move to Appendix,,
-	
+	\includegraphics[width=0.4\linewidth]{image/q1_cm.png}
 	\caption{Confusion matrix of PCA}
 	\label{fig:q1_cm}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\linewidth]{image/q3_1_cm.png} % Seems better to move to Appendix,,
+	\includegraphics[width=0.4\linewidth]{image/q3_1_cm.png} % Seems better to move to Appendix,,
 	
 	\caption{Confusion matrix of PCA-LDA}
 	\label{fig:q3_1_cm}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\linewidth]{image/q3_2_cm.png} % Seems better to move to Appendix,,
+	\includegraphics[width=0.4\linewidth]{image/q3_2_cm.png} % Seems better to move to Appendix,,
 	
 	\caption{Confusion matrix of Ensemble model}
 	\label{fig:q3_2_cm}
@@ -36,40 +32,40 @@
 
 %-----
 
-\subsection{Prediction examples}
-\begin{figure}
+\section{Prediction examples}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\linewidth]{image/q1_success.png}
+	\includegraphics[width=0.4\linewidth]{image/q1_success.png}
 	
 	\caption{PCA classification success example}
 	\label{fig:q3_success}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\linewidth]{image/q1_fail.png}
+	\includegraphics[width=0.4\linewidth]{image/q1_fail.png}
 	
 	\caption{PCA classification failure example}
 	\label{fig:q3_fail}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\linewidth]{image/q3_success.png}
+	\includegraphics[width=0.4\linewidth]{image/q3_success.png}
 	
 	\caption{PCA-LDA classification success example}
 	\label{fig:q3_success}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\linewidth]{image/q3_fail.png}
+	\includegraphics[width=0.4\linewidth]{image/q3_fail.png}
 	
 	\caption{PCA-LDA classification failure example}
 	\label{fig:q3_fail}
 \end{figure}
 
-\subsection{Generative and Discriminative Subspace Learning}
+\section{Generative and Discriminative Subspace Learning}
 \label{sec:intro}
 Below is the objective function for generative and discriminative subspace learning. Our goal is to find $W$ that maximizes $J(W)$
 \begin{equation}
@@ -114,11 +110,11 @@ If $\alpha I + (1-\alpha)S_w$ is invertible, the equation becomes as below.(\cre
 \end{equation}
 Since $\lambda$ is some constants, we can regard \cref{eq:final} as a eigenvector-eigenvalue problem where W is an eigenvector matrix and lambda is an eigenvalue matrix.
 
-\subsection{Q5: Test result's confusion matrix and success/failure cases }
+\section{Q5: Test result's confusion matrix and success/failure cases }
 \label{subsec:Q5-1}
 The optimal parameters determined for the random forest through experiments are $N=250$, $D=8$, and $\text{splitnum}=10$. With this configuration, each real-time executable weak learner—axis-aligned and two-pixel tests—each was trained 10 times. The confusion matrix results below represent the best test accuracy among the 10 repetitive train results.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[t]{0.4\linewidth}
 		\centering
@@ -137,7 +133,7 @@ The optimal parameters determined for the random forest through experiments are 
 \end{figure}
 
 Additionally, the example success and failure cases based on the confusion matrix results above are shown below. Compared to the success cases, the failure cases show a higher similarity between the failed image and the predicted class, meaning that our model is reasonable.
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}{0.45\linewidth}
 		\centering
@@ -150,7 +146,7 @@ Additionally, the example success and failure cases based on the confusion matri
 	\end{subfigure}
 	\caption{Axis-aligned weak learner: Example success case}
 \end{figure}
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\linewidth}
 		\centering
@@ -164,7 +160,7 @@ Additionally, the example success and failure cases based on the confusion matri
 	\caption{Axis-aligned weak learner: Example failure case}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}{0.45\linewidth}
 		\centering
@@ -177,7 +173,7 @@ Additionally, the example success and failure cases based on the confusion matri
 	\end{subfigure}
 	\caption{Two-pixel test weak learner: Example success case}
 \end{figure}
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}{0.45\linewidth}
 		\centering
@@ -191,5 +187,5 @@ Additionally, the example success and failure cases based on the confusion matri
 	\caption{Two-pixel test weak learner: Example failure case}
 \end{figure}
 
-\subsection{Q5: Visualization of random forest's information gain process}
+\section{Q5: Visualization of random forest's information gain process}
 \label{subsec:Q5-2}
