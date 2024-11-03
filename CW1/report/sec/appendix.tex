@@ -112,7 +112,7 @@ Since $\lambda$ is some constants, we can regard \cref{eq:final} as a eigenvecto
 
 \section{Q5: Test result's confusion matrix and success/failure cases }
 \label{subsec:Q5-1}
-The optimal parameters determined for the random forest through experiments are $N=250$, $D=8$, and $\text{splitnum}=10$. With this configuration, each real-time executable weak learner—axis-aligned and two-pixel tests—each was trained 10 times. The confusion matrix results below represent the best test accuracy among the 10 repetitive train results.
+The optimal parameters determined for the random forest through experiments are $N=250$, $D=8$, and $\text{splitnum}=10$. With this configuration, each real-time executable weak learner—axis-aligned and two-pixel tests—each was trained 10 times. The confusion matrix results in \cref{fig:app-q5-6} represent the best test accuracy among the 10 repetitive train results.
 
 \begin{figure}[htbp]
 	\centering
@@ -130,9 +130,10 @@ The optimal parameters determined for the random forest through experiments are 
 		\label{fig:q5-fig8}
 	\end{subfigure}
 	\caption{Confusion matrix of optimal cases ($N=250$, $D=8$, and $\text{splitnum}=10$)}
+	\label{fig:app-q5-6}
 \end{figure}
 
-Additionally, the example success and failure cases based on the confusion matrix results above are shown below. Compared to the success cases, the failure cases show a higher similarity between the failed image and the predicted class, meaning that our model is reasonable.
+Additionally, the example success and failure cases based on the confusion matrix results above are shown in \cref{fig:app-q5-2}, \cref{fig:app-q5-3}, \cref{fig:app-q5-4}, \cref{fig:app-q5-5}. Compared to the success cases, the failure cases show a higher similarity between the failed image and the predicted class, meaning that our model is reasonable.
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}{0.45\linewidth}
@@ -145,6 +146,7 @@ Additionally, the example success and failure cases based on the confusion matri
 		\includegraphics[width=\linewidth]{image/q5-app/q5-axis-succ2.png}
 	\end{subfigure}
 	\caption{Axis-aligned weak learner: Example success case}
+	\label{fig:app-q5-2}
 \end{figure}
 \begin{figure}[htbp]
 	\centering
@@ -158,6 +160,7 @@ Additionally, the example success and failure cases based on the confusion matri
 		\includegraphics[width=\linewidth]{image/q5-app/q5-axis-fail2.png}
 	\end{subfigure}
 	\caption{Axis-aligned weak learner: Example failure case}
+	\label{fig:app-q5-3}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -172,6 +175,7 @@ Additionally, the example success and failure cases based on the confusion matri
 		\includegraphics[width=\linewidth]{image/q5-app/q5-two-succ2.png}
 	\end{subfigure}
 	\caption{Two-pixel test weak learner: Example success case}
+	\label{fig:app-q5-4}
 \end{figure}
 \begin{figure}[htbp]
 	\centering
@@ -185,7 +189,50 @@ Additionally, the example success and failure cases based on the confusion matri
 		\includegraphics[width=\linewidth]{image/q5-app/q5-two-fail2.png}
 	\end{subfigure}
 	\caption{Two-pixel test weak learner: Example failure case}
+	\label{fig:app-q5-5}
 \end{figure}
 
 \section{Q5: Visualization of random forest's information gain process}
 \label{subsec:Q5-2}
+Random forests utilize the entropy-based information gain method to reduce the diversity of classes within the nodes as they move down to the lower nodes. To illustrate the execution of this algorithm in our code, we have traced the path down the left child nodes of a single tree and represented the results in the histograms below. Each histogram corresponds to the left node of the previous figure, and the result \cref{fig:app-q5-1} align with our expectations.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q5-app/hist1.png}
+		\caption{Top node (depth=1)}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q5-app/hist2.png}
+		\caption{depth=2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q5-app/hist3.png}
+		\caption{depth=3}
+	\end{subfigure}
+	
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q5-app/hist4.png}
+		\caption{depth=4}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q5-app/hist5.png}
+		\caption{depth=5}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q5-app/hist6.png}
+		\caption{Leaf (depth=6)}
+	\end{subfigure}
+	\caption{Visualization of random forest's information gain process}
+	\label{fig:app-q5-1}
+\end{figure}

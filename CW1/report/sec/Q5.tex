@@ -10,13 +10,13 @@ The random forest model has several key parameters, and testing them all simulta
 
 %-------------------------------------------------------------------------
 \subsection{Number of trees \& The depth of trees}
-We varied the number of trees and their depths, obtaining the results shown in \cref{fig:q5-fig1}. In the graph, the best accuracy 0.625 occurred at $N(number of trees)=250$ and $D(depth)=10$, explained as follows:
+We varied the number of trees and their depths, obtaining the results shown in \cref{fig:q5-fig1}. In the graph, the best accuracy 0.625 occurred at $N \text{ (number of trees)} = 250$ and $D\text{ (depth)}=10$, explained as follows:
 \begin{itemize}
 	\item Number of Trees: A single tree in random forests tends to overfit to data; therefore, we can generalize the model using ensembles of trees. As shown in \cref{fig:q5-fig1}, the accuracy converges near $N=250$, which is selected as optimal parameter.
 	\item Tree Depth: When depth is $D$, maximum of $2^D-1$ nodes are generated. As shown in \cref{fig:q5-fig1}, for a given $N$, accuracy initially increases with tree depth but later decreases due to overfitting. Notably, the optimal depth $D$ increases with $N$, indicating that a larger $N$ result in less overfitting. Also, we chose $D=8$ as the later experiment's standard value, accuracy of 0.610, which is sufficiently high.
 \end{itemize}
 
-The theoretical training/testing time when adjusting the number of trees and tree depth is as follows, and our testing time results align with theoretical predictions \cref{fig:q5-fig2}, \cref{fig:q5-fig3}. However, due to the small size of the training data, some splits stop prematurely, not reaching the maximum tree depth, resulting in  less training time than theory.
+The theoretical training/testing time when adjusting the number of trees and tree depth is as follows, and our testing time results align with theoretical predictions \cref{fig:q5-fig2}, \cref{fig:q5-fig3}. However, due to the small size of the training data, some splits stop, not reaching the maximum tree depth (when data in the node less than 5), resulting in less training time than theory.
 \begin{itemize}
 	\item Number of Trees $N$: $O(N)$ time
 	\item Tree Depth $D$: $O(2^D)$ time
@@ -47,7 +47,7 @@ Moreover, our code do not utilize parallelization of each tree's growth. Based o
 \end{figure}
 
 \subsection{Randomness parameter}
-Due to the high dimension image data, we randomly select dimensions and threshold values to create the split function. For each split function, we attempt $\rho$ random splits and choose the one with the highest information gain. There is a trade-off in the magnitude of $\rho$ value: If the $\rho$ value is too low, fewer splits are attempted, which reduces similarity between trees but increases the risk of the less-optimal split. Conversely, as $\rho$ increases, more various split functions are tested, leading to greater similarity among trees, which decreases the advantage of ensemble multiple trees. As shown in \cref{fig:q5-fig4}, accuracy initially increases with higher $\rho$ values until $\rho=10$ and then decreases, as expected. In \cref{fig:q5-fig5}, training time is same as expected, $O(\rho)$. However, since $\rho$ does not affect the resulting tree structure in training, it has constant testing time.
+We randomly select dimensions and threshold values to create the split function. For each split function, we attempt $\rho$ random splits and choose the one with the highest information gain. There is a trade-off in the magnitude of $\rho$ value: If the $\rho$ value is too low, fewer splits are attempted, which reduces similarity between trees but increases the risk of the less-optimal split. Conversely, as $\rho$ increases, more various split functions are tested, leading to greater similarity among trees, which decreases the advantage of ensemble multiple trees. As shown in \cref{fig:q5-fig4}, accuracy initially increases with higher $\rho$ values until $\rho=10$ and then decreases, as expected. In \cref{fig:q5-fig5}, training time is same as expected, $O(\rho)$. However, since $\rho$ does not affect the resulting tree structure in training, it has constant testing time.
 
 \begin{figure}
 	\centering
@@ -75,12 +75,9 @@ The impact of the weak learner are shown in \cref{fig:q5-fig7}. As expected, the
 	
 	\caption{Axis-aligned vs Two-pixel test}
 	\label{fig:q5-fig7}
-\end{figure}
-
-
-\subsection{Confusion matrix, Example success/failures, Information gain histogram}
+\end{figure}\\
 The main results' confusion matrix, example success/failures, example node's histogram representing information gain along splitting are written in Appendix: \ref{subsec:Q5-1}, \ref{subsec:Q5-2}
 
 \subsection{Comparision with PCA and PCA-LDA method}
-Since parallel programming was not used our random forest, both the training and testing times are significantly large compared to the PCA and PCA-LDA methods. In addition, for PCA and PCA-LDA, the differences are further amplified due to Python NumPy’s parallelization for matrix operations and scikit-learn’s optimized KNN classification, which is well-tuned for handling multiple data points efficiently.
+Since parallel programming was not used our random forest, both the training and testing times are significantly large compared to the PCA method. In addition, for PCA, Python NumPy’s parallelization for matrix operations and scikit-learn’s optimized KNN classification can handle multiple data points much more efficiently.
 About the accuracy, because raw pixel values were used directly as inputs, the optimal accuracy of Q1 PCA is almost identical to random forest's result. Overall, the accuracy is much lower compared to the PCA-LDA method, indicating that in situations where the size of the training dataset is small ($N << D$), applying the random forest with no PCA is relatively less suitable. Additionally, similar to the PCA-LDA ensemble, as the number of base models (~tree) increases, there is a tendency for accuracy to improve, indicating that the 'ensemble models' is beneficial.
