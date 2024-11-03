@@ -23,7 +23,7 @@ The theoretical training/testing time when adjusting the number of trees and tre
 \end{itemize}
 Moreover, our code do not utilize parallelization of each tree's growth. Based on theoretical insights from course materials, training each tree in parallel could reduce the time for the tree numbers to $O(1)$, not $O(N)$.
 
-\begin{figure}[t]
+\begin{figure}
 	\centering
 	\begin{subfigure}[t]{\linewidth}
 		\centering
@@ -49,7 +49,7 @@ Moreover, our code do not utilize parallelization of each tree's growth. Based o
 \subsection{Randomness parameter}
 Due to the high dimension image data, we randomly select dimensions and threshold values to create the split function. For each split function, we attempt $\rho$ random splits and choose the one with the highest information gain. There is a trade-off in the magnitude of $\rho$ value: If the $\rho$ value is too low, fewer splits are attempted, which reduces similarity between trees but increases the risk of the less-optimal split. Conversely, as $\rho$ increases, more various split functions are tested, leading to greater similarity among trees, which decreases the advantage of ensemble multiple trees. As shown in \cref{fig:q5-fig4}, accuracy initially increases with higher $\rho$ values until $\rho=10$ and then decreases, as expected. In \cref{fig:q5-fig5}, training time is same as expected, $O(\rho)$. However, since $\rho$ does not affect the resulting tree structure in training, it has constant testing time.
 
-\begin{figure}[t]
+\begin{figure}
 	\centering
 	\begin{subfigure}[t]{0.4\linewidth}
 		\centering
@@ -69,7 +69,7 @@ Due to the high dimension image data, we randomly select dimensions and threshol
 
 \subsection{Impact of the different types of weak-learners}
 The impact of the weak learner are shown in \cref{fig:q5-fig7}. As expected, the axis-aligned method provides sufficiently good testing accuracy along with the shorter training and testing times. However, even with all other parameters being the same, the accuracy when using the two-pixel test is approximately 8.32\% higher. Therefore, the two-points test's information gain per split is greater than that of the axis-aligned method. Although other weak learners, such as linear and non-linear methods, were also implemented and tested, they took so long to measure training and testing times that it was expected impractical for real-time training/testing, and thus they were not included in the report.
-\begin{figure}[t]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.8\linewidth]{image/q5-fig7.png}
 	
@@ -82,4 +82,5 @@ The impact of the weak learner are shown in \cref{fig:q5-fig7}. As expected, the
 The main results' confusion matrix, example success/failures, example node's histogram representing information gain along splitting are written in Appendix: \ref{subsec:Q5-1}, \ref{subsec:Q5-2}
 
 \subsection{Comparision with PCA and PCA-LDA method}
-Since parallel programming was not used our random forest, both the training and testing times are significantly large compared to the PCA and PCA-LDA methods. Because raw pixel values were used directly as inputs, the optimal accuracy of Q1 PCA is almost identical to random forest's result. Overall, the accuracy is much lower compared to the PCA-LDA method, indicating that in situations where the size of the training dataset is small ($N << D$), the random forest is relatively less suitable. Additionally, similar to the PCA-LDA ensemble, as the number of base models (~tree) increases, there is a tendency for accuracy to improve, indicating that the 'ensemble models' is beneficial.
+Since parallel programming was not used our random forest, both the training and testing times are significantly large compared to the PCA and PCA-LDA methods. In addition, for PCA and PCA-LDA, the differences are further amplified due to Python NumPy’s parallelization for matrix operations and scikit-learn’s optimized KNN classification, which is well-tuned for handling multiple data points efficiently.
+About the accuracy, because raw pixel values were used directly as inputs, the optimal accuracy of Q1 PCA is almost identical to random forest's result. Overall, the accuracy is much lower compared to the PCA-LDA method, indicating that in situations where the size of the training dataset is small ($N << D$), applying the random forest with no PCA is relatively less suitable. Additionally, similar to the PCA-LDA ensemble, as the number of base models (~tree) increases, there is a tendency for accuracy to improve, indicating that the 'ensemble models' is beneficial.
