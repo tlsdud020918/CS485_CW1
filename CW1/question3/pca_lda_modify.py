@@ -24,6 +24,9 @@ the error of the committee machine vs the average error of individual models: �
 recognition accuracy and confusion matrix  
 """ 
 
+train_data, train_label, test_data, test_label = split_data(data_path="../dataset/face.mat") # D * N
+mean_face = np.mean(train_data, axis=1).reshape(-1, 1)
+
 def pca_projection(base, mean, data, M=50, M0=30, rs=False):
     eig_val, eig_vec = pca(base, mean)
     if rs:
@@ -94,8 +97,6 @@ optimization
 3. bagging subset rate, m0, model_num 고정: ensemble에서만 있는 변수
 """
 if __name__ == "__main__":
-    train_data, train_label, test_data, test_label = split_data(data_path="../dataset/face.mat") # D * N
-    mean_face = np.mean(train_data, axis=1).reshape(-1, 1)
 
     mpca = 150
     m0 = 145

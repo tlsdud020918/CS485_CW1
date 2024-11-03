@@ -16,7 +16,7 @@ def memory_usage(message=''):
     return rss
 
 def pca(A, mean_A, low=True):
-    #start = time.time()
+    start = time.time()
     total_num = A.shape[1]
     A = A - mean_A
 
@@ -38,8 +38,8 @@ def pca(A, mean_A, low=True):
     val = val[idx]
     vec = vec[:, idx]
 
-    #end = time.time()
-    # print(f"{end - start: .5f} sec")
+    end = time.time()
+    print(f"{end - start: .5f} sec")
     # memory_usage(message='pca')
 
     return val, vec
@@ -70,7 +70,7 @@ def pca_transform (data, eig_val, eig_vec, mean_face, M=50):
     # projected data = D' * N
     return projected_data
 
-def face_reconstruction(data, eig_val, eig_vec, mean_face, M=50, isshow=False):
+def face_reconstruction(data, idx, eig_val, eig_vec, mean_face, M=50, isshow=False, original=False):
     centered_data = data - mean_face
 
     # eig_vec = D * D' / data = D * N
@@ -83,17 +83,26 @@ def face_reconstruction(data, eig_val, eig_vec, mean_face, M=50, isshow=False):
 
     if isshow:
         # show only the first image of test dataset
-        recon_fig, (ax1, ax2) = plt.subplots(1, 2)
+        # recon_fig, (ax1, ax2) = plt.subplots(1, 2)
 
-        ax1.imshow(data[:, 0].reshape((46, -1)).T, cmap='gray')
-        ax1.set_title('Original')
-        ax1.axis('off')
+        # ax1.imshow(data[:, idx].reshape((46, -1)).T, cmap='gray')
+        # ax1.set_title('Original')
+        # ax1.axis('off')
 
-        ax2.imshow(reconstructed_data[:, 0].reshape((46, -1)).T, cmap='gray')
-        ax2.set_title('Reconstructed with {} bases'.format(M))
-        ax2.axis('off')
+        # ax2.imshow(reconstructed_data[:, idx].reshape((46, -1)).T, cmap='gray')
+        # ax2.set_title('Reconstructed with {} bases'.format(M))
+        # ax2.axis('off')
 
+        # plt.show()
+        if original:
+            plt.imshow(data[:, idx].reshape((46, -1)).T, cmap='gray')
+            plt.title('Original')
+            plt.show()
+
+        plt.imshow(reconstructed_data[:, idx].reshape((46, -1)).T, cmap='gray')
+        plt.title('Reconstructed with {} bases'.format(M))
         plt.show()
+        return
 
     return theoretical_error, reconstruction_error # same when using train dataset
 
