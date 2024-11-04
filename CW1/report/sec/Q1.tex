@@ -33,7 +33,7 @@ The only difference between them is computation time: PCA takes 8.015s, while lo
 
 
 \subsection{Image reconstuction using Eigenfaces}
-Using pca basis from above, we perform face reconstruction. \cref{fig:recon_result}shows reconstruction results using different numbers of PCA bases. As seen in the images, the reconstruction become more accurate with more bases. When using only 10 bases, the results resemble the mean face(\cref{fig:q1_meanface}) of training data. This occurs because the PCA basis is oriented to capture common features by maximizing data variance. Thus, with a small number of bases, the reconstruction reflects common features of the dataset more strongly than specific details of each image.
+Using pca basis from above, we perform face reconstruction. \cref{fig:recon_result}shows reconstruction results using different numbers of PCA bases. As seen in the images, the reconstruction become more accurate with more bases. When using only 10 bases, the results resemble the mean face(\cref{subsec:Q1_meanface}) of training data. This occurs because the PCA basis is oriented to capture common features by maximizing data variance. Thus, with a small number of bases, the reconstruction reflects common features of the dataset more strongly than specific details of each image.
 \vspace{-0.2cm}
 
 \begin{figure}[htbp]
