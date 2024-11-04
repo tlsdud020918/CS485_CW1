@@ -10,17 +10,17 @@ There are two method to conduct PCA: PCA($S=AA^T$) and low dimensional PCA($S=A^
 
 \begin{figure}[htbp]
 	\centering
-	\begin{subfigure}[t]{0.48\linewidth}
+	\begin{subfigure}[t]{0.4\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{image/q1_eigval_pca.png}
-		\caption{nonzero eigenvalues of PCA}
+		\caption{eigenvalues of PCA}
 		\label{fig:eigval_pca}
 	\end{subfigure}%
-	\hfill
-	\begin{subfigure}[t]{0.48\linewidth}
+    \hspace{0.2cm}
+	\begin{subfigure}[t]{0.4\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{image/q1_eigval_lowdim.png}
-		\caption{nonzero eigenvalues of low-dimensional PCA}
+		\caption{eigenvalues of low-dimensional PCA}
 		\label{fig:eigval_lowdim}
 	\end{subfigure}
 	\caption{Comparison between eigenvalues of PCA methods}
@@ -33,9 +33,10 @@ The only difference between them is computation time: PCA takes 8.015s, while lo
 
 
 \subsection{Image reconstuction using Eigenfaces}
-Using pca basis from above, we perform face reconstruction. \cref{fig:recon_train} and \cref{fig:recon_test} shows reconstruction results using different numbers of PCA bases. As seen in the images, the reconstruction become more accurate with more bases. When using only 10 bases, the results resemble the mean face(\cref{fig:q1_meanface}) of training data. This occurs because the PCA basis is oriented to capture common features by maximizing data variance. Thus, with a small number of bases, the reconstruction reflects common features of the dataset more strongly than specific details of each image.
+Using pca basis from above, we perform face reconstruction. \cref{fig:recon_result}shows reconstruction results using different numbers of PCA bases. As seen in the images, the reconstruction become more accurate with more bases. When using only 10 bases, the results resemble the mean face(\cref{fig:q1_meanface}) of training data. This occurs because the PCA basis is oriented to capture common features by maximizing data variance. Thus, with a small number of bases, the reconstruction reflects common features of the dataset more strongly than specific details of each image.
+\vspace{-0.2cm}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[t]{0.2\linewidth}
 		\centering
@@ -64,19 +65,14 @@ Using pca basis from above, we perform face reconstruction. \cref{fig:recon_trai
 		\caption{415 bases}
 		\label{fig:train_re_415}
 	\end{subfigure}
-	\caption{Training data reconstruction results}
-	\label{fig:recon_train}
-\end{figure}
-
-\begin{figure}
-	\centering
+    \hfill
 	\begin{subfigure}[t]{0.2\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{image/q1_recon_test_original.png}
 		\caption{original}
 		\label{fig:test_re_original}
 	\end{subfigure}%
-	\hfill
+    \hfill
 	\begin{subfigure}[t]{0.2\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{image/q1_recon_test_10.png}
@@ -97,23 +93,23 @@ Using pca basis from above, we perform face reconstruction. \cref{fig:recon_trai
 		\caption{415 bases}
 		\label{fig:test_re_415}
 	\end{subfigure}
-	\caption{Test data reconstruction results}
-	\label{fig:recon_test}
+	\caption{Data reconstruction results (1st row: training data, 2nd row: test data)}
+	\label{fig:recon_result}
 \end{figure}
+\vspace{-0.2cm}
 
 For more detailed analysis, we computed the reconstruction error. The theoretical error is given by $\sum_{i=n+1}^M \lambda_i$ where $n$is the number of bases we used for the reconstruction, $M$is total number of PCA bases, and $\lambda_i$ is eigenvalues of unused eigenvectors. The actual reconstruction error can be calculated using L2-norm of difference between the original and reconstructed data.
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\begin{subfigure}[t]{0.48\linewidth}
+	\begin{subfigure}[t]{0.4\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{image/q1_recon_error_train.png}
 		\caption{training data}
 		\label{fig:recon_error_train}
 	\end{subfigure}%
-	\hfill
-	\begin{subfigure}[t]{0.48\linewidth}
-		\centering
+    \hspace{0.2cm}
+	\begin{subfigure}[t]{0.4\linewidth}
 		\includegraphics[width=\linewidth]{image/q1_recon_error_test.png}
 		\caption{test data}
 		\label{fig:recon_error_test}
@@ -124,34 +120,30 @@ For more detailed analysis, we computed the reconstruction error. The theoretica
 
 As shown in \cref{fig:recon_error}, the reconstruction error from the training data matched the theoretical result. However, for the test data, while the graph’s shape was similar to the theoretical result, the actual values differed slightly. This may be because the PCA bases used for reconstruction were derived from the training data, not the test data.
 
+\vspace{-0.5cm}
 \subsection{KNN classification using Eigenfaces}
 
 We can also perform classification using PCA with NN classifier. As shown in \cref{fig:q1_knn_accuracy}, accuracy improves with more PCA bases and fewer neighbors($k$). More PCA bases preserve more data information, leading to accurate projections in the PCA subspace. For the number of neighbors, using fewer makes the classifier more sensitive to local information and better at preserving class boundaries, thus increasing classification accuracy.
 
 In terms of time and memory, the number of neighbors made no significant difference. However, as shown in \cref{fig:q1_knn_time} and \cref{fig:q1_knn_memory}, the execution time and memory usage of the k-NN classifier linearly increase  with the number of PCA bases increase. This is because, the execution time and memory usage is $O(N\cdot M)$ where $N$ is the number of total data and $M$ is the number of PCA bases we used. Since $k$ only affects on final selection process, its impact during the computation is very small.
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	
-	% 윗줄에 하나의 이미지, 크기는 0.48로 유지
-	\begin{subfigure}[t]{0.48\linewidth}
+	\begin{subfigure}[t]{0.3\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{image/q1_accuracy.png}
 		\caption{accuracy}
 		\label{fig:q1_knn_accuracy}
-	\end{subfigure}
-	
-    \vspace{0.5cm} % 이미지들 사이에 공간 추가
-
-	% 아랫줄에 두 개의 이미지, 크기 동일하게 0.48
-	\begin{subfigure}[t]{0.48\linewidth}
+	\end{subfigure}	
+    \hfill
+	\begin{subfigure}[t]{0.3\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{image/q1_time.png}
 		\caption{running time}
 		\label{fig:q1_knn_time}
 	\end{subfigure}%
-	\hfill
-	\begin{subfigure}[t]{0.48\linewidth}
+    \hfill
+	\begin{subfigure}[t]{0.3\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{image/q1_memory.png}
 		\caption{memory usage}
@@ -162,7 +154,7 @@ In terms of time and memory, the number of neighbors made no significant differe
 	\label{fig:pca_knn}
 \end{figure}
 
-However, its overall prediction accyracy is about 0.6, which is not that high. This might because, PCA is not very sophisticated model to capture all the detailed features of data. As we also check from the confusion matrix(\cref{fig:q1_cm}), there are many components outside the diagonal, that failed to be predicted.
+However, its overall prediction accuracy is about 0.6, which is not that high. This might because, PCA is not very sophisticated model to capture all the detailed features of data. As we also check from the confusion matrix(\cref{fig:q1_cm}), there are many components outside the diagonal, that failed to be predicted.
 
 
-Detailed prediction examples can be found in Appendix B, C.
+Detailed prediction examples can be found in \cref{subsec:Q13_cm} and \cref{subsec:Q13_eg}.

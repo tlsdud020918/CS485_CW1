@@ -5,14 +5,19 @@ PCA is a generative model, which aims to reconstruct the input. And LDA is a dis
 
 %-------------------------------------------------------------------------
 \subsection{Objective function}
-To achieve our goal, it is natural to think of a function that combine objective functions from PCA and LDA.
+To achieve our goal, it is natural to think of a function that combine objective functions of PCA and LDA.
+
+\cref{eq:pca_lda} is identical to PCA objective function when $\alpha=1$ and to LDA objective function when $\alpha=0$. Our goal is to find $W$ that maximizes $J(W)$ since reconstruction error is reduced and subspaces become more discriminative when PCA, LDA objective functions are maximized. Such $W$ must satisfy \cref{eq:pca_lda_sol} for some constant $\lambda$.
+
+\vspace{-0.2cm}
 \begin{equation}
   J(W) = \alpha W^TSW+(1-\alpha) \frac{W^TS_bW}{W^TS_wW}
   \label{eq:pca_lda}
 \end{equation}
-\cref{eq:pca_lda} is identical to PCA objective function when $\alpha=1$ and to LDA objective function when $\alpha=0$. Our goal is to find $W$ that maximizes $J(W)$ since reconstruction error is reduced and subspaces become more discriminative when PCA, LDA objective functions are maximized. Such $W$ must satisfy \cref{eq:pca_lda_sol} for some constant $\lambda$.
+\vspace{-0.2cm}
 \begin{equation}
   (\alpha S+(1-\alpha)S_b)W = \lambda (\alpha I + (1-\alpha)S_w)W
   \label{eq:pca_lda_sol}
 \end{equation}
-If $\alpha I + (1-\alpha)S_w$ is invertible, we can easily get $W$ using eigenvector-eigenvalue method. Detailed derivation can be found in Appendix D.
+
+If $\alpha I + (1-\alpha)S_w$ is invertible, we can easily get $W$ using eigenvector-eigenvalue method. Detailed derivation can be found in \cref{subsec:Q4}.

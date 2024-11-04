@@ -1,4 +1,5 @@
-\section{Mean face}
+\section{Q1: Mean face}
+\label{subsec:Q1_meanface}
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.4\linewidth]{image/q1_meanface.png} 
@@ -6,66 +7,74 @@
 	\label{fig:q1_meanface}
 \end{figure}
 
-\section{Confusion matrix}
+\section{Q1,3: Confusion matrix}
+\label{subsec:Q13_cm}
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.4\linewidth]{image/q1_cm.png}
+        \begin{subfigure}[t]{0.3\linewidth}
+		\centering
+	\includegraphics[width=\linewidth]{image/q1_cm.png}
 	\caption{Confusion matrix of PCA}
 	\label{fig:q1_cm}
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.4\linewidth]{image/q3_1_cm.png} % Seems better to move to Appendix,,
-	
+        \end{subfigure}
+    \quad
+        \begin{subfigure}[t]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/q3_1_cm.png} % Seems better to move to Appendix,,
 	\caption{Confusion matrix of PCA-LDA}
 	\label{fig:q3_1_cm}
+        \end{subfigure}
+    \quad
+        \begin{subfigure}[t]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/q3_2_cm.png} % Seems better to move to Appendix,,
+	\caption{Confusion matrix of Emsenble model}
+	\label{fig:q3_1_cm}
+        \end{subfigure}
+    \label{fig:cm}
 \end{figure}
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.4\linewidth]{image/q3_2_cm.png} % Seems better to move to Appendix,,
-	
-	\caption{Confusion matrix of Ensemble model}
-	\label{fig:q3_2_cm}
-\end{figure}
+As shown in \cref{fig:cm}, confusion matrix of PCA has much more off-diagonal elements than PCA-LDA and Ensemble model. This shows that the prediction is much more successful using PCA-LDA and Ensemble model than PCA. Also, Ensemble model has slightly less off-diagonal elements than PCA-LDA. This indicates Ensemble model is more accurate in classification than the original model. 
+% \cref{fig:q3_1_cm} is the confusion matrix of PCA-LDA classification result. As most of prediction result is on the diagonal entry, it indicates that most of prediction is successful. We take a closer look at success and failure cases. \cref{fig:q3_success} shows successfully predicted cases. Despite the different angles of the faces, the model infer the class accurately. \cref{fig:q3_fail} is failure cases. It seems that the prediction failed because of the similar glasses and face expression.
 
 %-----
-
-\section{Prediction examples}
+\newpage
+\section{Q1,3: Prediction examples}
+\label{subsec:Q13_eg}
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.4\linewidth]{image/q1_success.png}
-	
+        \begin{subfigure}[t]{0.4\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/q1_success.png}
 	\caption{PCA classification success example}
 	\label{fig:q3_success}
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.4\linewidth]{image/q1_fail.png}
-	
+        \end{subfigure}
+    \quad
+        \begin{subfigure}[t]{0.4\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/q1_fail.png}
 	\caption{PCA classification failure example}
 	\label{fig:q3_fail}
-\end{figure}
-
-\begin{figure}[htbp]
+        \end{subfigure}
+    \quad
+	\begin{subfigure}[t]{0.4\linewidth}
 	\centering
-	\includegraphics[width=0.4\linewidth]{image/q3_success.png}
-	
+	\includegraphics[width=\linewidth]{image/q3_success.png}
 	\caption{PCA-LDA classification success example}
 	\label{fig:q3_success}
-\end{figure}
-
-\begin{figure}[htbp]
+        \end{subfigure}
+    \quad
+        \begin{subfigure}[t]{0.4\linewidth}
 	\centering
-	\includegraphics[width=0.4\linewidth]{image/q3_fail.png}
-	
+	\includegraphics[width=\linewidth]{image/q3_fail.png}
 	\caption{PCA-LDA classification failure example}
 	\label{fig:q3_fail}
+    \end{subfigure}
 \end{figure}
+Above images shows successful and failure examples of classification using PCA and PCA-LDA. If we take a closer look at successful cases, the model infer the class accurately despite different angles of face. This may because the model can generalize well across different angles of the face. For failure cases, the prediction appears to have failed because the glasses and facial expressions are similar.
 
-\section{Generative and Discriminative Subspace Learning}
+\section{Q4: Generative and Discriminative Subspace Learning}
+\label{subsec:Q4}
 \label{sec:intro}
 Below is the objective function for generative and discriminative subspace learning. Our goal is to find $W$ that maximizes $J(W)$
 \begin{equation}
@@ -73,31 +82,31 @@ Below is the objective function for generative and discriminative subspace learn
 	\label{eq:pca_lda_2}
 \end{equation}
 \cref{eq:pca_lda_2} can be changed as \cref{eq:pca_lda_3} since $W^TW=I$. (This is because, $W$ is a projection matrix, hence $W^TW$ indicates re-projection after projection to the subspace. Therefore, projected vector returns to itself after applying $W^TW$.)
-\begin{multline}
-	J(W) = \alpha \frac{W^TSW}{W^TW}+(1-\alpha) \frac{W^TS_bW}{W^TS_wW} \\
+\begin{equation}
+	J(W) = \alpha \frac{W^TSW}{W^TW}+(1-\alpha) \frac{W^TS_bW}{W^TS_wW}
 	= \frac{W^T(\alpha S + (1-\alpha)S_b)W}{W^T(\alpha I + (1-\alpha)S_w)W}
 	\label{eq:pca_lda_3}
-\end{multline}
+\end{equation}
 If we keep the denominator constant, the problem we have to solve changes to the problem to maximize the numerator. Let the denominator $k(constant)$ and use Lagrange-multiplier. (\cref{eq:denominator})
 \begin{equation}
 	W^T(\alpha I + (1-\alpha)S_w)W = k
 	\label{eq:denominator}
 \end{equation}
-\begin{multline}
-	L(W,\lambda)=W^T(\alpha S + (1-\alpha)S_b)W \\
+\begin{equation}
+	L(W,\lambda)=W^T(\alpha S + (1-\alpha)S_b)W
 	+ \lambda(k-W^T\alpha I + (1-\alpha)S_w)W)
 	\label{eq:lagrange}
-\end{multline}
+\end{equation}
 To get the solution, each partial derivatives of $L(W,\lambda)$ with respect to $W$ and $\lambda$ must be 0.
-\begin{multline}
-	\frac{\partial L}{\partial W} = 2*W(\alpha S+(1-\alpha)S_b \\
+\begin{equation}
+	\frac{\partial L}{\partial W} = 2*W(\alpha S+(1-\alpha)S_b
 	-\lambda(\alpha I+(1-\alpha)S_w))=0
 	\label{eq:partial_W}
-\end{multline}
-\begin{multline}
+\end{equation}
+\begin{equation}
 	\frac{\partial L}{\partial \lambda} = k - W^T(\alpha I+(1-\alpha)S_w)W=0
 	\label{eq:partial_lambda}
-\end{multline}
+\end{equation}
 \cref{eq:partial_lambda} is satisfied from our assumption of the denominator. Now, the only thing we have to consider is \cref{eq:partial_W}. If we organize \cref{eq:partial_W}, we can get \cref{eq:solution}.
 \begin{equation}
 	(\alpha S+(1-\alpha)S_b)W = \lambda (\alpha I + (1-\alpha)S_w)W
