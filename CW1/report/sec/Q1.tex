@@ -123,7 +123,7 @@ As shown in \cref{fig:recon_error}, the reconstruction error from the training d
 \vspace{-0.5cm}
 \subsection{KNN classification using Eigenfaces}
 
-We can also perform classification using PCA with NN classifier. As shown in \cref{fig:q1_knn_accuracy}, accuracy improves with more PCA bases and fewer neighbors($k$). More PCA bases preserve more data information, leading to accurate projections in the PCA subspace. For the number of neighbors, using fewer makes the classifier more sensitive to local information and better at preserving class boundaries, thus increasing classification accuracy.
+We can also perform classification using PCA with NN classifier. As shown in \cref{fig:q1_knn_accuracy}, classification accuracy converges after approximately 90 PCA bases. Therefore, it can be concluded that even when the original image dimension of 2576 is significantly reduced to 90, we can preserve sufficient feature information for classification. For the number of neighbors, since we are using only 8 training images per class, using fewer neighbors is better at preserving class boundaries, thus increasing classification accuracy.
 
 In terms of time and memory, the number of neighbors made no significant difference. However, as shown in \cref{fig:q1_knn_time} and \cref{fig:q1_knn_memory}, the execution time and memory usage of the k-NN classifier linearly increase  with the number of PCA bases increase. This is because, the execution time and memory usage is $O(N\cdot M)$ where $N$ is the number of total data and $M$ is the number of PCA bases we used. Since $k$ only affects on final selection process, its impact during the computation is very small.
 
