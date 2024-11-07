@@ -117,7 +117,14 @@ If $\alpha I + (1-\alpha)S_w$ is invertible, the equation becomes as below.(\cre
 	(\alpha I + (1-\alpha)S_w)^{-1}(\alpha S+(1-\alpha)S_b)W = \lambda W
 	\label{eq:final}
 \end{equation}
-Since $\lambda$ is some constants, we can regard \cref{eq:final} as a eigenvector-eigenvalue problem where W is an eigenvector matrix and lambda is an eigenvalue matrix.
+Since $\lambda$ is some constants, we can regard \cref{eq:final} as a eigenvector-eigenvalue problem where W is an eigenvector matrix and lambda is an eigenvalue matrix.\\
+
+We can discuss the foreseeable behavior when applying the resulting $W$ matrix from the above equation to data. Since this optimization involves both PCA and LDA, it can blend the advantages of both methods, generating high-accuracy classification results similar to Question 3's PCA-LDA method.\\
+
+The pros and cons of this approach are as follows: In Question 3, we trained $W_{pca}$ and $W_{lda}$ separately for PCA and LDA and used $W_{opt}^T = W_{lda}^T W_{pca}^T$. This requires solving two eigenvector-eigenvalue problems to derive each of $W_{pca}$ and $W_{lda}$. However, by using our new objective function, we only need to solve one eigenvector-eigenvalue problem and store just the $W$ matrix, which reduces both time complexity and the space required to store the trained parameters.
+
+There are also some drawbacks to this approach. Simultaneously tuning the hyperparameters, $\alpha$ and the final dimension $D$ (where $W = (N \cdot D)$), may be challenging. In Question 3, since we trained $W_{pca}$ and $W_{lda}$ separately, we could verify the effectiveness of PCA and LDA process individually by applying it step-by-step to real images and printing intermediate outputs (e.g., displaying the PCA-reconstructed image). However, in the method proposed for Question 4, such verification is not possible. In other words, if the current test accuracy is not high enough, it would be difficult to determine whether the issue arose during the PCA or LDA phase.
+
 
 \section{Q5: Test result's confusion matrix and success/failure cases }
 \label{subsec:Q5-1}
