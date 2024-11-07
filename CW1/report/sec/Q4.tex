@@ -20,4 +20,4 @@ To achieve our goal, it is natural to think of a function that combine objective
   \label{eq:pca_lda_sol}
 \end{equation}
 
-If $\alpha I + (1-\alpha)S_w$ is invertible, we can easily get $W$ using eigenvector-eigenvalue method. Using this method, we can reduce computation time but it becomes difficult to determine the cause of error. Detailed derivation and the pros/cons of this method can be found in \cref{subsec:Q4}.
+If $\alpha I + (1-\alpha)S_w$ is invertible, we can easily get $W$ using eigenvector-eigenvalue method. Using this method, we can reduce computation time and memory space required to store the train parameters since we only use one weignt matrix $W$. Detailed derivation and the pros/cons of this method can be found in \cref{subsec:Q4}.
