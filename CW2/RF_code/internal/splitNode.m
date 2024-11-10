@@ -1,7 +1,5 @@
-function [node,nodeL,nodeR] = splitNode(data,node,param, visualise)
-% Split node
-
-%visualise = 1;
+function [node,nodeL,nodeR] = splitNode(data,node,param)
+% Split noded
 
 % Initilise child nodes
 iter = param.splitNum;
@@ -69,11 +67,6 @@ for n = 1:iter
     end
     
     ig = getIG(data,idx_); % Calculate information gain
-    
-    %if visualise
-    %    visualise_splitfunc(idx_,data,dim,t,ig,n);
-    %    pause();
-    %end
     
     if (sum(idx_) > 0 & sum(~idx_) > 0) % We check that children node are not empty
         [node, ig_best, idx_best] = updateIG(node,ig_best,ig,t,idx_,dim,idx_best);

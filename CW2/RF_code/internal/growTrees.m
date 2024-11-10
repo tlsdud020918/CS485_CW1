@@ -22,19 +22,10 @@ for T = 1:param.num
     
     % Initialise base node
     tree(T).node(1) = struct('idx',idx,'t',nan,'dim',-1,'prob',[]);
-    
-    % Split Nodes
-    visualize_nodes = [];
-    for d = 0:param.depth
-        visualize_nodes(end+1) = 2^d;
-    end
 
+    % Split Nodes
     for n = 1:2^(param.depth-1)-1
-        visualise=0;
-        if ismember(n, visualize_nodes)
-            visualise=1;
-        end
-        [tree(T).node(n),tree(T).node(n*2),tree(T).node(n*2+1)] = splitNode(data,tree(T).node(n),param, visualise);
+        [tree(T).node(n),tree(T).node(n*2),tree(T).node(n*2+1)] = splitNode(data,tree(T).node(n),param);
     end
     
     % Leaf Nodes
