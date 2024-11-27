@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch.nn.functional as F
 from scipy.linalg import svd
+import math
 
 # Custom Dataset Class
 class Caltech101Dataset(Dataset):
@@ -64,15 +65,19 @@ test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
 # Define the CNN Architecture
 class CustomCNN(nn.Module):
-    def __init__(self, normalization="batch", compress_rank=128):
+    def __init__(self, total_layers=4, dropout=True, conv_kernel_size = 3, normalization="batch", skip_connection = 0, compress_rank=128):
         super(CustomCNN, self).__init__()
         self.compress_rank = compress_rank
+        self.total_layers = total_layers
+        self.dropout = dropout
+        self.conv_kernel_size = conv_kernel_size
+        self.skip_connection = skip_connection
 
-        def get_normalization(num_features):
+        def get_normalization(num_features, input_size):
             if normalization == "batch":
                 return nn.BatchNorm2d(num_features)
             elif normalization == "layer":
-                return nn.LayerNorm([num_features, 1, 1])  # Channel-first input
+                return nn.LayerNorm([num_features, input_size, input_size])  # Channel-first input
             elif normalization == "group":
                 return nn.GroupNorm(4, num_features)  # 4 groups as an example
             elif normalization == "instance":
@@ -80,43 +85,72 @@ class CustomCNN(nn.Module):
             else:
                 raise ValueError(f"Unsupported normalization type: {normalization}")
             
-        self.conv_layers = nn.Sequential(
-            nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1),  # Conv Layer 1, 128*128
-            get_normalization(32),  # Batch Norm default
-            nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2, stride=2), # 64*64
-            nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),  # Conv Layer , 64*64
-            get_normalization(64),  # Batch Norm default
-            nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2, stride=2), # 32*32
-            nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),  # Conv Layer 3, 32*32
-            get_normalization(128),  # Batch Norm default
-            nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2, stride=2), # 16*16
-            nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1),  # Conv Layer 3, 16*16
-            get_normalization(256),  # Batch Norm default
-            nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2, stride=2) # 8*8
-        )
+        self.conv_blocks = nn.ModuleList()
+        in_channels = 3
+        out_channels_list = [32, 64, 128, 256, 512][:total_layers]
 
-        self.fc_layers = nn.Sequential(
-            # nn.Linear(128 * 30 * 20, 512),  # Fully Connected Layer 1
-            nn.Linear(256 * 8 * 8, 512),
-            nn.ReLU(),
-            nn.Dropout(0.2),  # Dropout
-            nn.Linear(512, 128),  # Fully Connected Layer 2
-            nn.ReLU(),
-            nn.Dropout(0.2),
-            nn.Linear(128, 32),  # Fully Connected Layer 3
-            nn.ReLU(),
-            nn.Dropout(0.1),
-            nn.Linear(32, len(train_dataset.classes))  # Output layer
-        )
+        input_size = 128
+        for out_channels in out_channels_list:
+            block = nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, kernel_size=conv_kernel_size, stride=1, padding=1),
+                get_normalization(out_channels, input_size),
+                nn.ReLU(),
+                nn.MaxPool2d(kernel_size=2, stride=2)
+            )
+            self.conv_blocks.append(block)
+            in_channels = out_channels
+            input_size = math.floor((input_size - conv_kernel_size + 2 * 1) / 1 + 1)  # Conv2D
+            input_size = math.floor(input_size / 2)
+
+        self.channel_matchers = nn.ModuleList([
+            nn.Conv2d(3 if i == 0 else out_channels_list[i-1], out_channels_list[i], kernel_size=1)
+            for i in range(len(out_channels_list))
+        ])
+
+        fc_input_size = out_channels_list[-1] * (input_size ** 2)
+
+        fc_blocks = [
+            nn.Linear(fc_input_size, 512),
+            nn.ReLU()
+        ]
+        if self.dropout:
+            fc_blocks.append(nn.Dropout(0.2))
+        fc_blocks.extend([
+            nn.Linear(512, 128),
+            nn.ReLU()
+        ])
+        if self.dropout:
+            fc_blocks.append(nn.Dropout(0.2))
+        fc_blocks.extend([
+            nn.Linear(128, 32),
+            nn.ReLU()
+        ])
+        if self.dropout:
+            fc_blocks.append(nn.Dropout(0.1))
+        fc_blocks.append(nn.Linear(32, len(train_dataset.classes)))
+
+        self.fc_layers = nn.Sequential(*fc_blocks)
         
     def forward(self, x):
-        x = self.conv_layers(x)
-        x = x.view(x.size(0), -1)  # Flatten
+        residual = x 
+
+        for i, block in enumerate(self.conv_blocks):
+            x = block(x) # if self.skip_connection == 0, do nothing with residual
+            if self.skip_connection == 1: # connect every layers
+                residual = nn.functional.interpolate(residual, size=x.size()[2:], mode='bilinear', align_corners=False)  
+                residual = self.channel_matchers[i](residual)
+                x += residual
+                residual = x
+            elif self.skip_connection == 2: # connect every 2 layers
+                residual = nn.functional.interpolate(residual, size=x.size()[2:], mode='bilinear', align_corners=False)  
+                residual = self.channel_matchers[i](residual)
+                if i % 2 == 1:  # Add skip connection every 2 blocks
+                    x += residual  # Add residual input to the current output
+                residual = x  
+
+        x = x.view(x.size(0), -1)  # Flatten before fully connected layers
         x = self.fc_layers(x)
+
         return x
     
     def compress_fc_layers(self):
@@ -141,6 +175,7 @@ class SquaredHingeLoss(nn.Module):
         return torch.mean(squared_hinge_loss)
     
 def truncated_svd(layer, rank):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     W = layer.weight.data.cpu().numpy()  
     B = layer.bias.data.cpu().numpy()
     U, S, Vh = np.linalg.svd(W, full_matrices=False) # w/o full_matrices=False -> too much computing time
@@ -166,6 +201,7 @@ def truncated_svd(layer, rank):
     return linear_layer
 
 def train_model(model, train_loader, optimizer, criterion=nn.CrossEntropyLoss(), num_epochs=10):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.train()
     train_losses = []
     for epoch in range(num_epochs):
@@ -186,6 +222,7 @@ def train_model(model, train_loader, optimizer, criterion=nn.CrossEntropyLoss(),
 
 # Evaluate the CNN
 def evaluate_model(model, test_loader):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.eval()
     correct = 0
     total = 0
