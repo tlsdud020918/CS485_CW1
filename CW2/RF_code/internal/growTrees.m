@@ -23,7 +23,6 @@ for T = 1:param.num
     % Initialise base node
     tree(T).node(1) = struct('idx',idx,'t',nan,'dim',-1,'prob',[]);
 
-    % Split Nodes
     for n = 1:2^(param.depth-1)-1
         [tree(T).node(n),tree(T).node(n*2),tree(T).node(n*2+1)] = splitNode(data,tree(T).node(n),param);
     end
