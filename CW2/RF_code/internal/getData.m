@@ -9,13 +9,13 @@ function [ data_train, data_query ] = getData( MODE )
 % TODO: obtain the visual vocabulary and the bag-of-words histograms for both training and testing data.
 % train: visual vocab 추출 + vector quantization으로 각 이미지에 대한 histogram 추출
 % test: vector quantization으로 각 이미지에 대한 histogram 추출
-% VARIABLES: vocabulary size
-vocab_size = 64;
-is_kmeans = 1;
+% VARIABLES START
+vocab_size = 256;
+is_kmeans = 0;
 
 showImg = 0;
 
-max_descriptor = 10e5;
+max_descriptor = 1e5;
 num_class = 10;
 num_img = 15;
 
@@ -27,6 +27,7 @@ PHOW_SIZES = [4 8 10];
 % saving variables
 feature_save = 1;
 vocab_save = 1;
+% VARIABLES END
 
 switch MODE
     case 'Toy_Gaussian' % Gaussian distributed 2D points
@@ -151,19 +152,20 @@ switch MODE
         end
         if is_kmeans == 0
             disp("RF codebook building...")
-            vocab_trees = q3_codebook_rf(desc_selected_labeled', vocab_size);
+            % change vocab_size into real result's dimension
+            [vocab_trees, vocab_time, vocab_size, weaklearner] = q3_codebook_rf(desc_selected_labeled', vocab_size);
             fprintf("RF codebook building time: %f sec \n", vocab_time)
         end
         % end: 3. Build visual codebook: Kmeans / RF method
         
         % 4. Build histograms of train data (vector quantization)
         if is_kmeans == 1
-            disp("k-means trainset histogram building...")
+            disp("k-means trainset histogram building...");
             [histograms, hist_time] = q1_quantization_kmeans(desc_tr, kmeans_vocab);
         end
         if is_kmeans == 0
-            disp("RF trainset histogram building...")
-            [histograms, hist_time] = q3_quantization_rf(desc_tr, vocab_trees, vocab_size);
+            disp("RF trainset histogram building...");
+            [histograms, hist_time] = q3_quantization_rf(desc_tr, vocab_trees, vocab_size, weaklearner);
         end
 
         % X = (이미지 개수 * vocab_size), Y = (이미지 개수 * 1)
@@ -239,7 +241,7 @@ switch MODE
         end
         if is_kmeans == 0
             disp("RF testset histogram building...")
-            % TODO!!!!!
+            [histograms, hist_time] = q3_quantization_rf(desc_tr, vocab_trees, vocab_size, weaklearner);
         end
 
         % X = (이미지 개수 * vocab_size), Y = (이미지 개수 * 1)
