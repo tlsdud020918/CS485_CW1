@@ -65,7 +65,7 @@ test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
 # Define the CNN Architecture
 class CustomCNN(nn.Module):
-    def __init__(self, total_layers=4, dropout=True, conv_kernel_size = 3, normalization="batch", skip_connection = 0, compress_rank=128):
+    def __init__(self, total_layers=4, dropout=True, conv_kernel_size = 3, normalization="batch", skip_connection = 1, compress_rank=128):
         super(CustomCNN, self).__init__()
         self.compress_rank = compress_rank
         self.total_layers = total_layers
@@ -177,6 +177,7 @@ class SquaredHingeLoss(nn.Module):
 def truncated_svd(layer, rank):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     W = layer.weight.data.cpu().numpy()  
+    print(np.linalg.matrix_rank(W))
     B = layer.bias.data.cpu().numpy()
     U, S, Vh = np.linalg.svd(W, full_matrices=False) # w/o full_matrices=False -> too much computing time
 
