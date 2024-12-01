@@ -1,0 +1,70 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+%\ifcvprfinal\pagestyle{empty}\fi
+\setcounter{page}{1}
+\begin{document}
+\pagestyle{plain}
+
+%%%%%%%%% TITLE
+\title{MLCV Coursework 1 Report}
+
+\author{Shinyoung Yu\\
+20200405\\
+School of Computing\\
+{\tt\small sahaa0918@kaist.ac.kr}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+\and
+Jiyun Park\\
+20210263\\
+School of Computing\\
+{\tt\small jiyun02@kaist.ac.kr}
+}
+
+\maketitle
+%\thispagestyle{empty}
+
+% \input{sec/0_abstract}   
+\input{sec/Q1.tex}
+\input{sec/Q2.tex}
+\input{sec/Q3.tex}
+\input{sec/Q4.tex}
+\input{sec/Q5.tex}
+
+\onecolumn
+\newpage
+{\LARGE 
+	\textbf{Appendix}\par}
+\appendix
+\input{sec/appendix.tex}
+
+% WARNING: do not forget to delete the supplementary pages from your submission 
+% \input{sec/X_suppl}
+
+\end{document}

@@ -1,0 +1,23 @@
+\section{Generative and Discriminative Subspace Learning}
+\label{sec:intro}
+
+PCA is a generative model, which aims to reconstruct the input. And LDA is a discriminative model, which conducts classification. If we want to take advantages of both methods, it is inevitable to redisign the objective function.
+
+%-------------------------------------------------------------------------
+\subsection{Objective function}
+To achieve our goal, it is natural to think of a function that combine objective functions of PCA and LDA.
+
+\cref{eq:pca_lda} is identical to PCA objective function when $\alpha=1$ and to LDA objective function when $\alpha=0$. Our goal is to find $W$ that maximizes $J(W)$ since reconstruction error is reduced and subspaces become more discriminative when PCA, LDA objective functions are maximized. Such $W$ must satisfy \cref{eq:pca_lda_sol} for some constant $\lambda$.
+
+\vspace{-0.2cm}
+\begin{equation}
+  J(W) = \alpha W^TSW+(1-\alpha) \frac{W^TS_bW}{W^TS_wW}
+  \label{eq:pca_lda}
+\end{equation}
+\vspace{-0.2cm}
+\begin{equation}
+  (\alpha S+(1-\alpha)S_b)W = \lambda (\alpha I + (1-\alpha)S_w)W
+  \label{eq:pca_lda_sol}
+\end{equation}
+
+If $\alpha I + (1-\alpha)S_w$ is invertible, we can easily get $W$ using eigenvector-eigenvalue method. Using this method, we can reduce computation time and memory space required to store the train parameters since we only use one weignt matrix $W$. However, it is more difficult to visualize the result of feature extraction of PCA compared to PCA-LDA's sequential data transformation. Detailed derivation and the pros/cons of this method can be found in \cref{subsec:Q4}.
