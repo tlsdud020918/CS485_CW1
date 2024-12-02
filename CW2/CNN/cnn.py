@@ -65,9 +65,9 @@ test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
 # Define the CNN Architecture
 class CustomCNN(nn.Module):
-    def __init__(self, total_layers=4, dropout=True, conv_kernel_size = 3, normalization="batch", skip_connection = 1, compress_rank=128):
+    def __init__(self, total_layers=4, dropout=True, conv_kernel_size = 3, normalization="batch", skip_connection = 1):
         super(CustomCNN, self).__init__()
-        self.compress_rank = compress_rank
+        # self.compress_rank = compress_rank
         self.total_layers = total_layers
         self.dropout = dropout
         self.conv_kernel_size = conv_kernel_size
@@ -153,10 +153,10 @@ class CustomCNN(nn.Module):
 
         return x
     
-    def compress_fc_layers(self):
+    def compress_fc_layers(self, compress_rank):
         for i, layer in enumerate(self.fc_layers):
             if isinstance(layer, nn.Linear):
-                self.fc_layers[i] = truncated_svd(layer, self.compress_rank)
+                self.fc_layers[i] = truncated_svd(layer, compress_rank)
     
 class SquaredHingeLoss(nn.Module):
     def __init__(self):
