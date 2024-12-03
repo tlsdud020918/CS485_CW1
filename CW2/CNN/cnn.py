@@ -153,10 +153,13 @@ class CustomCNN(nn.Module):
 
         return x
     
-    def compress_fc_layers(self, compress_rank):
+    def compress_fc_layers(self, compress_ratio):
         for i, layer in enumerate(self.fc_layers):
             if isinstance(layer, nn.Linear):
-                self.fc_layers[i] = truncated_svd(layer, compress_rank)
+                rank = int(torch.linalg.matrix_rank(layer.weight.data))
+                if rank>=128:
+                    compress_rank = int(rank * compress_ratio)
+                    self.fc_layers[i] = truncated_svd(layer, compress_rank)
     
 class SquaredHingeLoss(nn.Module):
     def __init__(self):
