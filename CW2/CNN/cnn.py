@@ -177,6 +177,25 @@ class SquaredHingeLoss(nn.Module):
         # Take mean across classes and batch
         return torch.mean(squared_hinge_loss)
     
+class RegulizedLoss(nn.Module):
+    def __init__(self, lambda_reg, model):
+        super(RegulizedLoss, self).__init__()
+        self.cross_entropy_loss = nn.CrossEntropyLoss()
+        self.lambda_reg = lambda_reg
+        self.model = model
+
+    def forward(self, outputs, targets):
+        ce_loss = self.cross_entropy_loss(outputs, targets)
+        
+        # Compute L2 Regularization term
+        l2_reg = 0.0
+        for param in self.model.parameters():
+            l2_reg += torch.norm(param, 2)**2  # Squared L2 norm
+        
+        # Total loss
+        total_loss = ce_loss + self.lambda_reg * l2_reg
+        return total_loss
+    
 def truncated_svd(layer, rank):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     W = layer.weight.data.cpu().numpy()  

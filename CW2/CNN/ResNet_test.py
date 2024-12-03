@@ -13,7 +13,7 @@ root_dir = os.path.join(current_dir, "../RF_code/Caltech_101")
 test_dataset = ResNetCaltech101Dataset(root_dir, transform=None)
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
-model = ResNetForImageClassification.from_pretrained("random_init_resnet", ignore_mismatched_sizes=True)
+model = ResNetForImageClassification.from_pretrained("fine_tuned_resnet", ignore_mismatched_sizes=True)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
