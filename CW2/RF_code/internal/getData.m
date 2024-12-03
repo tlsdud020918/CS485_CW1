@@ -11,7 +11,7 @@ function [ data_train, data_query ] = getData( MODE )
 % test: vector quantization으로 각 이미지에 대한 histogram 추출
 % VARIABLES START
 global vocab_size is_kmeans showImg feature_save vocab_save;
-global vocab_time train_hist_time test_hist_time;
+global vocab_time train_hist_time test_hist_time vocab_param;
 
 max_descriptor = 1e5;
 num_class = 10;
