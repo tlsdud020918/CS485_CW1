@@ -30,32 +30,44 @@ for n = 1:iter
             t = d_min + rand*((d_max-d_min)); % Pick a random value within the range as threshold
             idx_ = data(:,dim) < t;
         case 'two-pixel'
-            dim = randperm(D-1, 2); % Pick two random dimension
-            idxi = dim(1);
-            idxj = dim(2);
-            
-            xi = data(:, idxi);
-            xj = data(:, idxj);
-            
-            dist = xi - xj;
-            
-            d_min = single(min(dist)) + eps;
-            d_max = single(max(dist)) - eps;
-            
-            t = d_min + rand*((d_max - d_min));
-            idx_ = dist < t;
+            cond = true;
+            while cond == true
+                dim = randperm(D-1, 2); % Pick two random dimension
+                idxi = dim(1);
+                idxj = dim(2);
+                
+                xi = data(:, idxi);
+                xj = data(:, idxj);
+                
+                dist = xi - xj;
+                
+                d_min = single(min(dist)) + eps;
+                d_max = single(max(dist)) - eps;
+                
+                t = d_min + rand*((d_max - d_min));
+                idx_ = dist < t;
+                if (sum(idx_) > 0 && sum(~idx_) > 0) | (length(unique(idx)) <= 2)
+                    cond = false; % Break the loop when the condition is satisfied
+                end
+            end
         case 'linear'
             cond = true;
-            while cond
+            cnt = 1;
+            while cond | cnt < 10
+                cnt = cnt + 1;
                 dim = randperm(D-1, 2);
                 t = randn(3, 1);
                 phi = cat(2, data(:, dim), ones(N, 1));
                 idx_ = (double(phi) * t) < 0;
-                cond = sum(idx_) == 0 || sum(~idx_) == 0;
+                if (sum(idx_) > 0 && sum(~idx_) > 0) | (length(unique(idx)) <= 2)
+                    cond = false; % Break the loop when the condition is satisfied
+                end
             end
         case 'non-linear'
             cond = true;
-            while cond
+            cnt = 1;
+            while cond | cnt < 20
+                cnt = cnt + 1;
                 dim = randperm(D-1, 2);
                 t = randn(3, 3);
                 idx_ = true(N,1);
@@ -64,7 +76,9 @@ for n = 1:iter
                     phi = double(phi);
                     idx_(i) = (phi * t * phi.') < 0;
                 end
-                cond = sum(idx_) == 0 || sum(~idx_) == 0;
+                if (sum(idx_) > 0 && sum(~idx_) > 0) | (length(unique(idx)) <= 2)
+                    cond = false; % Break the loop when the condition is satisfied
+                end
             end
     end
     
@@ -76,6 +90,7 @@ for n = 1:iter
     end
     
     if (sum(idx_) > 0 & sum(~idx_) > 0) % We check that children node are not empty
+        assert(all(idx_ | ~idx_) && ~any(idx_ & ~idx_), 'Error: Overlapping indices detected!');
         [node, ig_best, idx_best] = updateIG(node,ig_best,ig,t,idx_,dim,idx_best);
     end
     

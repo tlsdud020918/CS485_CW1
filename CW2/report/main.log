@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.9)  7 NOV 2024 21:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.9.9)  3 DEC 2024 01:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -447,12 +447,6 @@ LaTeX Warning: Label `sec:intro' multiply defined.
 LaTeX Warning: Label `sec:intro@cref' multiply defined.
 
 
-LaTeX Warning: Label `sec:intro' multiply defined.
-
-
-LaTeX Warning: Label `sec:intro@cref' multiply defined.
-
-
 LaTeX Warning: Label `fig:q3_success' multiply defined.
 
 
@@ -561,332 +555,514 @@ LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 (sec/Q1.tex
-<image/q1_eigval_pca.png, id=3, 432.1746pt x 312.9291pt>
-File: image/q1_eigval_pca.png Graphic file (type png)
-<use image/q1_eigval_pca.png>
-Package pdftex.def Info: image/q1_eigval_pca.png  used on input line 15.
-(pdftex.def)             Requested size: 94.85292pt x 68.67747pt.
-<image/q1_eigval_lowdim.png, id=5, 432.1746pt x 312.9291pt>
-File: image/q1_eigval_lowdim.png Graphic file (type png)
-<use image/q1_eigval_lowdim.png>
-Package pdftex.def Info: image/q1_eigval_lowdim.png  used on input line 22.
-(pdftex.def)             Requested size: 94.85292pt x 68.67747pt.
-<image/q1_recon_train_original.png, id=10, 253.6677pt x 312.9291pt>
-File: image/q1_recon_train_original.png Graphic file (type png)
-<use image/q1_recon_train_original.png>
-Package pdftex.def Info: image/q1_recon_train_original.png  used on input line 
-43.
-(pdftex.def)             Requested size: 47.42645pt x 58.50215pt.
-<image/q1_recon_train_10.png, id=11, 253.6677pt x 312.9291pt>
-File: image/q1_recon_train_10.png Graphic file (type png)
-<use image/q1_recon_train_10.png>
-Package pdftex.def Info: image/q1_recon_train_10.png  used on input line 50.
-(pdftex.def)             Requested size: 47.42645pt x 58.50215pt.
-<image/q1_recon_train_200.png, id=12, 253.6677pt x 312.9291pt>
-File: image/q1_recon_train_200.png Graphic file (type png)
-<use image/q1_recon_train_200.png>
-Package pdftex.def Info: image/q1_recon_train_200.png  used on input line 57.
-(pdftex.def)             Requested size: 47.42645pt x 58.50215pt.
-<image/q1_recon_train_415.png, id=13, 253.6677pt x 312.9291pt>
-File: image/q1_recon_train_415.png Graphic file (type png)
-<use image/q1_recon_train_415.png>
-Package pdftex.def Info: image/q1_recon_train_415.png  used on input line 64.
-(pdftex.def)             Requested size: 47.42645pt x 58.50215pt.
-<image/q1_recon_test_original.png, id=14, 253.6677pt x 312.9291pt>
-File: image/q1_recon_test_original.png Graphic file (type png)
-<use image/q1_recon_test_original.png>
-Package pdftex.def Info: image/q1_recon_test_original.png  used on input line 7
-1.
-(pdftex.def)             Requested size: 47.42645pt x 58.50215pt.
-<image/q1_recon_test_10.png, id=15, 253.6677pt x 312.9291pt>
-File: image/q1_recon_test_10.png Graphic file (type png)
-<use image/q1_recon_test_10.png>
-Package pdftex.def Info: image/q1_recon_test_10.png  used on input line 78.
-(pdftex.def)             Requested size: 47.42645pt x 58.50215pt.
-<image/q1_recon_test_200.png, id=16, 253.6677pt x 312.9291pt>
-File: image/q1_recon_test_200.png Graphic file (type png)
-<use image/q1_recon_test_200.png>
-Package pdftex.def Info: image/q1_recon_test_200.png  used on input line 85.
-(pdftex.def)             Requested size: 47.42645pt x 58.50215pt.
-<image/q1_recon_test_415.png, id=17, 253.6677pt x 312.9291pt>
-File: image/q1_recon_test_415.png Graphic file (type png)
-<use image/q1_recon_test_415.png>
-Package pdftex.def Info: image/q1_recon_test_415.png  used on input line 92.
-(pdftex.def)             Requested size: 47.42645pt x 58.50215pt.
-<image/q1_recon_error_train.png, id=18, 424.9476pt x 338.2236pt>
-File: image/q1_recon_error_train.png Graphic file (type png)
-<use image/q1_recon_error_train.png>
-Package pdftex.def Info: image/q1_recon_error_train.png  used on input line 107
-.
-(pdftex.def)             Requested size: 94.85292pt x 75.4932pt.
-<image/q1_recon_error_test.png, id=19, 424.9476pt x 338.2236pt>
-File: image/q1_recon_error_test.png Graphic file (type png)
-<use image/q1_recon_error_test.png>
-Package pdftex.def Info: image/q1_recon_error_test.png  used on input line 113.
-
-(pdftex.def)             Requested size: 94.85292pt x 75.4932pt.
- [1{C:/Users/lucia/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/l
-ucia/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
-
-
- <./image/q1_eigval_pca.png> <./image/q1_eigval_lowdim.png> <./image/q1_recon_t
-rain_original.png> <./image/q1_recon_train_10.png> <./image/q1_recon_train_200.
-png> <./image/q1_recon_train_415.png> <./image/q1_recon_test_original.png> <./i
-mage/q1_recon_test_10.png> <./image/q1_recon_test_200.png> <./image/q1_recon_te
-st_415.png>]
-<image/q1_accuracy.png, id=54, 409.7709pt x 327.3831pt>
-File: image/q1_accuracy.png Graphic file (type png)
-<use image/q1_accuracy.png>
-Package pdftex.def Info: image/q1_accuracy.png  used on input line 134.
-(pdftex.def)             Requested size: 71.1415pt x 56.8383pt.
-<image/q1_time.png, id=55, 422.7795pt x 327.3831pt>
-File: image/q1_time.png Graphic file (type png)
-<use image/q1_time.png>
-Package pdftex.def Info: image/q1_time.png  used on input line 141.
-(pdftex.def)             Requested size: 71.1415pt x 55.0849pt.
-<image/q1_memory.png, id=56, 409.7709pt x 327.3831pt>
-File: image/q1_memory.png Graphic file (type png)
-<use image/q1_memory.png>
-Package pdftex.def Info: image/q1_memory.png  used on input line 148.
-(pdftex.def)             Requested size: 71.1415pt x 56.8383pt.
+<image/q1-fig1.png, id=4, 609.9588pt x 390.0171pt>
+File: image/q1-fig1.png Graphic file (type png)
+<use image/q1-fig1.png>
+Package pdftex.def Info: image/q1-fig1.png  used on input line 12.
+(pdftex.def)             Requested size: 118.56796pt x 75.812pt.
 ) (sec/Q2.tex
-<image/q2-fig5.png, id=61, 867.24pt x 289.08pt>
+<image/q2-fig5.png, id=7, 1228.59pt x 289.08pt>
 File: image/q2-fig5.png Graphic file (type png)
 <use image/q2-fig5.png>
 Package pdftex.def Info: image/q2-fig5.png  used on input line 11.
-(pdftex.def)             Requested size: 237.13594pt x 79.0451pt.
+(pdftex.def)             Requested size: 237.13594pt x 55.79472pt.
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 2
 1.
 
 (C:\Users\lucia\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-[2 <./image/q1_recon_error_train.png> <./image/q1_recon_error_test.png> <./imag
-e/q1_accuracy.png> <./image/q1_time.png> <./image/q1_memory.png> <./image/q2-fi
-g5.png>]
-<image/q2-fig1.png, id=89, 433.62pt x 289.08pt>
+[1{C:/Users/lucia/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/lu
+cia/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
+
+
+ <./image/q1-fig1.png> <./image/q2-fig5.png>]
+<image/q2-fig1.png, id=36, 1300.86pt x 289.08pt>
 File: image/q2-fig1.png Graphic file (type png)
 <use image/q2-fig1.png>
 Package pdftex.def Info: image/q2-fig1.png  used on input line 36.
-(pdftex.def)             Requested size: 113.82423pt x 75.88242pt.
-<image/q2-fig2.png, id=90, 433.62pt x 289.08pt>
+(pdftex.def)             Requested size: 113.82423pt x 25.29266pt.
+<image/q2-fig2.png, id=37, 1084.05pt x 289.08pt>
 File: image/q2-fig2.png Graphic file (type png)
 <use image/q2-fig2.png>
 Package pdftex.def Info: image/q2-fig2.png  used on input line 43.
-(pdftex.def)             Requested size: 113.82423pt x 75.88242pt.
-<image/q2-fig3.png, id=91, 462.528pt x 346.896pt>
+(pdftex.def)             Requested size: 113.82423pt x 30.35208pt.
+<image/q2-fig3.png, id=38, 1084.05pt x 289.08pt>
 File: image/q2-fig3.png Graphic file (type png)
 <use image/q2-fig3.png>
 Package pdftex.def Info: image/q2-fig3.png  used on input line 50.
-(pdftex.def)             Requested size: 113.82423pt x 85.36871pt.
-<image/q2-fig4.png, id=92, 462.528pt x 346.896pt>
+(pdftex.def)             Requested size: 113.82423pt x 30.35208pt.
+<image/q2-fig4.png, id=39, 650.43pt x 289.08pt>
 File: image/q2-fig4.png Graphic file (type png)
 <use image/q2-fig4.png>
 Package pdftex.def Info: image/q2-fig4.png  used on input line 57.
-(pdftex.def)             Requested size: 113.82423pt x 85.36871pt.
+(pdftex.def)             Requested size: 113.82423pt x 50.58534pt.
 ) (sec/Q3.tex
-<image/mpca_mlda.png, id=94, 304.9794pt x 297.0297pt>
-File: image/mpca_mlda.png Graphic file (type png)
-<use image/mpca_mlda.png>
-Package pdftex.def Info: image/mpca_mlda.png  used on input line 14.
-(pdftex.def)             Requested size: 154.1369pt x 150.12344pt.
-<image/q3_fs_rs.png, id=97, 409.7709pt x 327.3831pt>
-File: image/q3_fs_rs.png Graphic file (type png)
-<use image/q3_fs_rs.png>
-Package pdftex.def Info: image/q3_fs_rs.png  used on input line 54.
-(pdftex.def)             Requested size: 71.1415pt x 56.8383pt.
-<image/q3_data_rs.png, id=98, 409.7709pt x 327.3831pt>
-File: image/q3_data_rs.png Graphic file (type png)
-<use image/q3_data_rs.png>
-Package pdftex.def Info: image/q3_data_rs.png  used on input line 61.
-(pdftex.def)             Requested size: 71.1415pt x 56.8383pt.
-<image/q3_basemodel.png, id=99, 409.7709pt x 327.3831pt>
-File: image/q3_basemodel.png Graphic file (type png)
-<use image/q3_basemodel.png>
-Package pdftex.def Info: image/q3_basemodel.png  used on input line 68.
-(pdftex.def)             Requested size: 71.1415pt x 56.8383pt.
- [3 <./image/q2-fig1.png> <./image/q2-fig2.png> <./image/q2-fig3.png> <./image/
-q2-fig4.png> <./image/mpca_mlda.png> <./image/q3_fs_rs.png> <./image/q3_data_rs
-.png> <./image/q3_basemodel.png>]) (sec/Q4.tex)
-(sec/Q5.tex [4]
-<image/q5-fig1.png, id=149, 1156.32pt x 361.35pt>
-File: image/q5-fig1.png Graphic file (type png)
-<use image/q5-fig1.png>
-Package pdftex.def Info: image/q5-fig1.png  used on input line 25.
-(pdftex.def)             Requested size: 237.13594pt x 74.1048pt.
-<image/q5-fig2.png, id=150, 1156.32pt x 289.08pt>
-File: image/q5-fig2.png Graphic file (type png)
-<use image/q5-fig2.png>
-Package pdftex.def Info: image/q5-fig2.png  used on input line 31.
-(pdftex.def)             Requested size: 237.13594pt x 59.28383pt.
-<image/q5-fig3.png, id=151, 1156.32pt x 289.08pt>
-File: image/q5-fig3.png Graphic file (type png)
-<use image/q5-fig3.png>
-Package pdftex.def Info: image/q5-fig3.png  used on input line 37.
-(pdftex.def)             Requested size: 237.13594pt x 59.28383pt.
-<image/q5-fig4.png, id=154, 433.62pt x 289.08pt>
-File: image/q5-fig4.png Graphic file (type png)
-<use image/q5-fig4.png>
-Package pdftex.def Info: image/q5-fig4.png  used on input line 58.
-(pdftex.def)             Requested size: 94.85292pt x 63.23167pt.
-<image/q5-fig5.png, id=155, 433.62pt x 289.08pt>
-File: image/q5-fig5.png Graphic file (type png)
-<use image/q5-fig5.png>
-Package pdftex.def Info: image/q5-fig5.png  used on input line 65.
-(pdftex.def)             Requested size: 94.85292pt x 63.23167pt.
-<image/q5-fig7.png, id=157, 1300.86pt x 433.62pt>
-File: image/q5-fig7.png Graphic file (type png)
-<use image/q5-fig7.png>
-Package pdftex.def Info: image/q5-fig7.png  used on input line 78.
-(pdftex.def)             Requested size: 189.70947pt x 63.23389pt.
-) [5 <./image/q5-fig1.png> <./image/q5-fig2.png> <./image/q5-fig3.png> <./image
-/q5-fig4.png> <./image/q5-fig5.png> <./image/q5-fig7.png>]
-(sec/appendix.tex
-<image/q1_meanface.png, id=177, 253.6677pt x 312.9291pt>
-File: image/q1_meanface.png Graphic file (type png)
-<use image/q1_meanface.png>
-Package pdftex.def Info: image/q1_meanface.png  used on input line 5.
-(pdftex.def)             Requested size: 198.73946pt x 245.17715pt.
-<image/q1_cm.png, id=178, 731.3724pt x 642.4803pt>
-File: image/q1_cm.png Graphic file (type png)
-<use image/q1_cm.png>
-Package pdftex.def Info: image/q1_cm.png  used on input line 16.
-(pdftex.def)             Requested size: 149.05838pt x 130.93483pt.
-<image/q3_1_cm.png, id=179, 731.3724pt x 642.4803pt>
-File: image/q3_1_cm.png Graphic file (type png)
-<use image/q3_1_cm.png>
-Package pdftex.def Info: image/q3_1_cm.png  used on input line 23.
-(pdftex.def)             Requested size: 149.05838pt x 130.93483pt.
-<image/q3_2_cm.png, id=180, 731.3724pt x 642.4803pt>
-File: image/q3_2_cm.png Graphic file (type png)
-<use image/q3_2_cm.png>
-Package pdftex.def Info: image/q3_2_cm.png  used on input line 30.
-(pdftex.def)             Requested size: 149.05838pt x 130.93483pt.
- [6
 
- <./image/q1_meanface.png> <./image/q1_cm.png> <./image/q3_1_cm.png> <./image/q
-3_2_cm.png>]
-<image/q1_success.png, id=191, 713.3049pt x 591.8913pt>
-File: image/q1_success.png Graphic file (type png)
-<use image/q1_success.png>
-Package pdftex.def Info: image/q1_success.png  used on input line 49.
-(pdftex.def)             Requested size: 198.73946pt x 164.90656pt.
-<image/q1_fail.png, id=192, 713.3049pt x 591.8913pt>
-File: image/q1_fail.png Graphic file (type png)
-<use image/q1_fail.png>
-Package pdftex.def Info: image/q1_fail.png  used on input line 56.
-(pdftex.def)             Requested size: 198.73946pt x 164.90656pt.
-<image/q3_success.png, id=193, 713.3049pt x 591.8913pt>
-File: image/q3_success.png Graphic file (type png)
-<use image/q3_success.png>
-Package pdftex.def Info: image/q3_success.png  used on input line 63.
-(pdftex.def)             Requested size: 198.73946pt x 164.90656pt.
-<image/q3_fail.png, id=194, 713.3049pt x 591.8913pt>
-File: image/q3_fail.png Graphic file (type png)
-<use image/q3_fail.png>
-Package pdftex.def Info: image/q3_fail.png  used on input line 70.
-(pdftex.def)             Requested size: 198.73946pt x 164.90656pt.
- [7 <./image/q1_success.png> <./image/q1_fail.png> <./image/q3_success.png> <./
-image/q3_fail.png>]
-<image/q5-fig6.png, id=218, 731.3724pt x 642.4803pt>
-File: image/q5-fig6.png Graphic file (type png)
-<use image/q5-fig6.png>
-Package pdftex.def Info: image/q5-fig6.png  used on input line 139.
-(pdftex.def)             Requested size: 198.73946pt x 174.57979pt.
-<image/q5-fig8.png, id=219, 731.3724pt x 642.4803pt>
-File: image/q5-fig8.png Graphic file (type png)
-<use image/q5-fig8.png>
-Package pdftex.def Info: image/q5-fig8.png  used on input line 146.
-(pdftex.def)             Requested size: 198.73946pt x 174.57979pt.
-<image/q5-app/q5-axis-succ1.png, id=224, 589.7232pt x 177.0615pt>
-File: image/q5-app/q5-axis-succ1.png Graphic file (type png)
-<use image/q5-app/q5-axis-succ1.png>
-Package pdftex.def Info: image/q5-app/q5-axis-succ1.png  used on input line 159
+LaTeX Warning: File `image/mpca_mlda.png' not found on input line 14.
+
+
+! Package pdftex.def Error: File `image/mpca_mlda.png' not found: using draft s
+etting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.14 ...width=0.65\linewidth]{image/mpca_mlda.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q3_fs_rs.png' not found on input line 54.
+
+
+! Package pdftex.def Error: File `image/q3_fs_rs.png' not found: using draft se
+tting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.54 ...hics[width=\linewidth]{image/q3_fs_rs.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q3_data_rs.png' not found on input line 61.
+
+
+! Package pdftex.def Error: File `image/q3_data_rs.png' not found: using draft 
+setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.61 ...cs[width=\linewidth]{image/q3_data_rs.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q3_basemodel.png' not found on input line 68.
+
+
+! Package pdftex.def Error: File `image/q3_basemodel.png' not found: using draf
+t setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.68 ...[width=\linewidth]{image/q3_basemodel.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[2 <./image/q2-fig1.png> <./image/q2-fig2.png> <./image/q2-fig3.png> <./image/q
+2-fig4.png>]) (sec/Q4.tex) [3] (sec/appendix.tex
+
+LaTeX Warning: File `image/q1_meanface.png' not found on input line 5.
+
+
+! Package pdftex.def Error: File `image/q1_meanface.png' not found: using draft
+ setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.5 ...width=0.4\linewidth]{image/q1_meanface.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q1_cm.png' not found on input line 16.
+
+
+! Package pdftex.def Error: File `image/q1_cm.png' not found: using draft setti
+ng.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...raphics[width=\linewidth]{image/q1_cm.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q3_1_cm.png' not found on input line 23.
+
+
+! Package pdftex.def Error: File `image/q3_1_cm.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23 ...phics[width=\linewidth]{image/q3_1_cm.png}
+                                                   % Seems better to move to...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q3_2_cm.png' not found on input line 30.
+
+
+! Package pdftex.def Error: File `image/q3_2_cm.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.30 ...phics[width=\linewidth]{image/q3_2_cm.png}
+                                                   % Seems better to move to...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[4
+
+]
+
+LaTeX Warning: File `image/q1_success.png' not found on input line 49.
+
+
+! Package pdftex.def Error: File `image/q1_success.png' not found: using draft 
+setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 ...cs[width=\linewidth]{image/q1_success.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q1_fail.png' not found on input line 56.
+
+
+! Package pdftex.def Error: File `image/q1_fail.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.56 ...phics[width=\linewidth]{image/q1_fail.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q3_success.png' not found on input line 63.
+
+
+! Package pdftex.def Error: File `image/q3_success.png' not found: using draft 
+setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.63 ...cs[width=\linewidth]{image/q3_success.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q3_fail.png' not found on input line 70.
+
+
+! Package pdftex.def Error: File `image/q3_fail.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.70 ...phics[width=\linewidth]{image/q3_fail.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[5]
+
+LaTeX Warning: File `image/q5-fig6.png' not found on input line 139.
+
+
+! Package pdftex.def Error: File `image/q5-fig6.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.139 ...hics[width=\linewidth]{image/q5-fig6.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-fig8.png' not found on input line 146.
+
+
+! Package pdftex.def Error: File `image/q5-fig8.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.146 ...hics[width=\linewidth]{image/q5-fig8.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/q5-axis-succ1.png' not found on input line 15
+9.
+
+
+! Package pdftex.def Error: File `image/q5-app/q5-axis-succ1.png' not found: us
+ing draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.159 ...inewidth]{image/q5-app/q5-axis-succ1.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/q5-axis-succ2.png' not found on input line 16
+4.
+
+
+! Package pdftex.def Error: File `image/q5-app/q5-axis-succ2.png' not found: us
+ing draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.164 ...inewidth]{image/q5-app/q5-axis-succ2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/q5-axis-fail1.png' not found on input line 17
+3.
+
+
+! Package pdftex.def Error: File `image/q5-app/q5-axis-fail1.png' not found: us
+ing draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.173 ...inewidth]{image/q5-app/q5-axis-fail1.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/q5-axis-fail2.png' not found on input line 17
+8.
+
+
+! Package pdftex.def Error: File `image/q5-app/q5-axis-fail2.png' not found: us
+ing draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.178 ...inewidth]{image/q5-app/q5-axis-fail2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/q5-two-succ1.png' not found on input line 188
 .
-(pdftex.def)             Requested size: 223.58379pt x 67.13005pt.
-<image/q5-app/q5-axis-succ2.png, id=225, 589.7232pt x 177.0615pt>
-File: image/q5-app/q5-axis-succ2.png Graphic file (type png)
-<use image/q5-app/q5-axis-succ2.png>
-Package pdftex.def Info: image/q5-app/q5-axis-succ2.png  used on input line 164
+
+
+! Package pdftex.def Error: File `image/q5-app/q5-two-succ1.png' not found: usi
+ng draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.188 ...linewidth]{image/q5-app/q5-two-succ1.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/q5-two-succ2.png' not found on input line 193
 .
-(pdftex.def)             Requested size: 223.58379pt x 67.13005pt.
-<image/q5-app/q5-axis-fail1.png, id=226, 589.0005pt x 177.0615pt>
-File: image/q5-app/q5-axis-fail1.png Graphic file (type png)
-<use image/q5-app/q5-axis-fail1.png>
-Package pdftex.def Info: image/q5-app/q5-axis-fail1.png  used on input line 173
+
+
+! Package pdftex.def Error: File `image/q5-app/q5-two-succ2.png' not found: usi
+ng draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.193 ...linewidth]{image/q5-app/q5-two-succ2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/q5-two-fail1.png' not found on input line 202
 .
-(pdftex.def)             Requested size: 223.58379pt x 67.2138pt.
-<image/q5-app/q5-axis-fail2.png, id=227, 593.3367pt x 177.0615pt>
-File: image/q5-app/q5-axis-fail2.png Graphic file (type png)
-<use image/q5-app/q5-axis-fail2.png>
-Package pdftex.def Info: image/q5-app/q5-axis-fail2.png  used on input line 178
+
+
+! Package pdftex.def Error: File `image/q5-app/q5-two-fail1.png' not found: usi
+ng draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.202 ...linewidth]{image/q5-app/q5-two-fail1.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/q5-two-fail2.png' not found on input line 207
 .
-(pdftex.def)             Requested size: 223.58379pt x 66.71939pt.
-<image/q5-app/q5-two-succ1.png, id=228, 589.7232pt x 177.0615pt>
-File: image/q5-app/q5-two-succ1.png Graphic file (type png)
-<use image/q5-app/q5-two-succ1.png>
-Package pdftex.def Info: image/q5-app/q5-two-succ1.png  used on input line 188.
 
-(pdftex.def)             Requested size: 223.58379pt x 67.13005pt.
-<image/q5-app/q5-two-succ2.png, id=229, 589.7232pt x 177.0615pt>
-File: image/q5-app/q5-two-succ2.png Graphic file (type png)
-<use image/q5-app/q5-two-succ2.png>
-Package pdftex.def Info: image/q5-app/q5-two-succ2.png  used on input line 193.
 
-(pdftex.def)             Requested size: 223.58379pt x 67.13005pt.
-<image/q5-app/q5-two-fail1.png, id=230, 585.387pt x 177.0615pt>
-File: image/q5-app/q5-two-fail1.png Graphic file (type png)
-<use image/q5-app/q5-two-fail1.png>
-Package pdftex.def Info: image/q5-app/q5-two-fail1.png  used on input line 202.
+! Package pdftex.def Error: File `image/q5-app/q5-two-fail2.png' not found: usi
+ng draft setting.
 
-(pdftex.def)             Requested size: 223.58379pt x 67.62717pt.
-<image/q5-app/q5-two-fail2.png, id=231, 585.387pt x 177.0615pt>
-File: image/q5-app/q5-two-fail2.png Graphic file (type png)
-<use image/q5-app/q5-two-fail2.png>
-Package pdftex.def Info: image/q5-app/q5-two-fail2.png  used on input line 207.
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.207 ...linewidth]{image/q5-app/q5-two-fail2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-(pdftex.def)             Requested size: 223.58379pt x 67.62717pt.
-<image/q5-app/hist1.png, id=233, 452.4403pt x 362.10281pt>
-File: image/q5-app/hist1.png Graphic file (type png)
-<use image/q5-app/hist1.png>
-Package pdftex.def Info: image/q5-app/hist1.png  used on input line 221.
-(pdftex.def)             Requested size: 163.96347pt x 131.22437pt.
-<image/q5-app/hist2.png, id=234, 456.20438pt x 368.87813pt>
-File: image/q5-app/hist2.png Graphic file (type png)
-<use image/q5-app/hist2.png>
-Package pdftex.def Info: image/q5-app/hist2.png  used on input line 227.
-(pdftex.def)             Requested size: 163.96347pt x 132.57649pt.
-<image/q5-app/hist3.png, id=235, 459.96844pt x 364.36125pt>
-File: image/q5-app/hist3.png Graphic file (type png)
-<use image/q5-app/hist3.png>
-Package pdftex.def Info: image/q5-app/hist3.png  used on input line 233.
-(pdftex.def)             Requested size: 163.96347pt x 129.88565pt.
-<image/q5-app/hist4.png, id=236, 464.4853pt x 363.60844pt>
-File: image/q5-app/hist4.png Graphic file (type png)
-<use image/q5-app/hist4.png>
-Package pdftex.def Info: image/q5-app/hist4.png  used on input line 239.
-(pdftex.def)             Requested size: 163.96347pt x 128.35785pt.
-<image/q5-app/hist5.png, id=237, 463.7325pt x 367.3725pt>
-File: image/q5-app/hist5.png Graphic file (type png)
-<use image/q5-app/hist5.png>
-Package pdftex.def Info: image/q5-app/hist5.png  used on input line 245.
-(pdftex.def)             Requested size: 163.96347pt x 129.89401pt.
-<image/q5-app/hist6.png, id=238, 459.21562pt x 365.11406pt>
-File: image/q5-app/hist6.png Graphic file (type png)
-<use image/q5-app/hist6.png>
-Package pdftex.def Info: image/q5-app/hist6.png  used on input line 251.
-(pdftex.def)             Requested size: 163.96347pt x 130.3657pt.
-) [8]
 
-LaTeX Warning: Text page 9 contains only floats.
+LaTeX Warning: File `image/q5-app/hist1.png' not found on input line 221.
 
-[9 <./image/q5-fig6.png> <./image/q5-fig8.png> <./image/q5-app/q5-axis-succ1.pn
-g> <./image/q5-app/q5-axis-succ2.png> <./image/q5-app/q5-axis-fail1.png> <./ima
-ge/q5-app/q5-axis-fail2.png> <./image/q5-app/q5-two-succ1.png> <./image/q5-app/
-q5-two-succ2.png> <./image/q5-app/q5-two-fail1.png> <./image/q5-app/q5-two-fail
-2.png>] [10 <./image/q5-app/hist1.png> <./image/q5-app/hist2.png> <./image/q5-a
-pp/hist3.png> <./image/q5-app/hist4.png> <./image/q5-app/hist5.png> <./image/q5
--app/hist6.png>] (main.aux)
+
+! Package pdftex.def Error: File `image/q5-app/hist1.png' not found: using draf
+t setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.221 ...width=\linewidth]{image/q5-app/hist1.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/hist2.png' not found on input line 227.
+
+
+! Package pdftex.def Error: File `image/q5-app/hist2.png' not found: using draf
+t setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.227 ...width=\linewidth]{image/q5-app/hist2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/hist3.png' not found on input line 233.
+
+
+! Package pdftex.def Error: File `image/q5-app/hist3.png' not found: using draf
+t setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.233 ...width=\linewidth]{image/q5-app/hist3.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/hist4.png' not found on input line 239.
+
+
+! Package pdftex.def Error: File `image/q5-app/hist4.png' not found: using draf
+t setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.239 ...width=\linewidth]{image/q5-app/hist4.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/hist5.png' not found on input line 245.
+
+
+! Package pdftex.def Error: File `image/q5-app/hist5.png' not found: using draf
+t setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.245 ...width=\linewidth]{image/q5-app/hist5.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `image/q5-app/hist6.png' not found on input line 251.
+
+
+! Package pdftex.def Error: File `image/q5-app/hist6.png' not found: using draf
+t setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.251 ...width=\linewidth]{image/q5-app/hist6.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+) [6] [7] [8] [9] (main.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
@@ -897,13 +1073,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 15222 strings out of 475248
- 257424 string characters out of 5757814
- 1947801 words of memory out of 5000000
- 36470 multiletter control sequences out of 15000+600000
- 583708 words of font info for 95 fonts, out of 8000000 for 9000
+ 15614 strings out of 475248
+ 272360 string characters out of 5757814
+ 1939801 words of memory out of 5000000
+ 36880 multiletter control sequences out of 15000+600000
+ 584223 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,939b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,864b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/lucia/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmex10.pfb><C:/Users/lucia/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmmi10.pfb><C:/Users/lucia/AppData/Local/Programs/MiKTeX/fonts/type1/p
@@ -922,9 +1098,9 @@ lic/amsfonts/cm/cmsy7.pfb><C:/Users/lucia/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/urw/courier/ucrr8a.pfb><C:/Users/lucia/AppData/Local/Programs/MiKTeX/fonts
 /type1/urw/times/utmb8a.pfb><C:/Users/lucia/AppData/Local/Programs/MiKTeX/fonts
 /type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (10 pages, 3287618 bytes).
+Output written on main.pdf (9 pages, 1682648 bytes).
 PDF statistics:
- 362 PDF objects out of 1000 (max. 8388607)
- 68 named destinations out of 1000 (max. 500000)
- 271 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 224 PDF objects out of 1000 (max. 8388607)
+ 52 named destinations out of 1000 (max. 500000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
