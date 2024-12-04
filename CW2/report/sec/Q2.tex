@@ -18,11 +18,11 @@ Changing the number of trees and depth, we extracted the result in \cref{fig:q2-
 \end{itemize}
 
 \noindent
-When $N = \text{(number of trees)}$, $D = \text{(depth)}$ and $\rho = \text{(number of attempts to split per node)}$, the theoretical training/testing time is as follows, and our training time results almost align with theoretical predictions as shown in \cref{fig:q2-fig2}, \cref{fig:q2-fig3}. However, since the testing time is generally more than 10 times shorter than the training time, it is sensitive to noise caused by memory loading time. Unlike our expectations, the testing time graph with respect to the value of $D$ is not seem as linear complexity, due to the influence of noise caused by the exponentially increasing memory with tree depth.
+When $N = \text{(number of trees)}$, $D = \text{(depth)}$ and $\rho = \text{(number of attempts to split per node)}$, the theoretical training/testing time is as below, and our training time results almost align with theoretical predictions as shown in \cref{fig:q2-fig2}, \cref{fig:q2-fig3}. However, since the testing time is generally more than 10 times shorter than the training time, it is sensitive to noise caused by memory loading time. Unlike our expectations, the testing time graph with respect to the value of $D$ is not seem as linear complexity, due to the influence of noise caused by the exponentially increasing memory with tree depth.
 
 \begin{itemize}
-	\item Training time: $O(ND\rho)$
-	\item Testing time: $O(ND)$
+	\item Training time: $O(ND\rho \times \text{number of training data})$
+	\item Testing time: $O(ND \times \text{number of testing data})$
 	\item Space complexity (= Number of nodes): $O(2^{D} \times N)$
 \end{itemize}
 
@@ -36,17 +36,17 @@ When $N = \text{(number of trees)}$, $D = \text{(depth)}$ and $\rho = \text{(num
 	\end{subfigure}
 	\begin{subfigure}[H]{\linewidth}
 		\centering
-		\includegraphics[width=\linewidth]{image/q2-fig2.png}
-		\caption{Training\&Testing accuracy and time according to the number of tree (D = 8)}
+		\includegraphics[width=0.8\linewidth]{image/q2-fig2.png}
+		\caption{Train\&Test accuracy and time according to the number of tree (D = 8)}
 		\label{fig:q2-fig2}
 	\end{subfigure}
 	\begin{subfigure}[H]{\linewidth}
 		\centering
-		\includegraphics[width=\linewidth]{image/q2-fig3.png}
+		\includegraphics[width=0.8\linewidth]{image/q2-fig3.png}
 		\caption{Training\&Testing accuracy and time according to the depth of tree (N = 250)}
 		\label{fig:q2-fig3}
 	\end{subfigure}
-	\caption{Training\&Testing accuracy and time according to the number and depth of trees}
+	\caption{Train\&Test accuracy and time according to the number and depth of trees}
 \end{figure}
 \noindent
 Moreover, our code do not utilize parallelization of each tree's growth. Based on theoretical insights from course materials, training each tree in parallel could reduce the time complexity from $O(N)$ to $O(1)$ with respect to the number of trees.
@@ -54,9 +54,9 @@ Moreover, our code do not utilize parallelization of each tree's growth. Based o
 \subsection{Randomness parameter}
 We randomly select dimensions and threshold values to create the split function. For each split function, we attempt $\rho$ random splits and choose the one with highest information gain. There is a trade-off in the magnitude of $\rho$ value: If the $\rho$ value is too low, fewer splits are attempted, which reduces similarity between trees but increases the risk of less-optimal split. Conversely, as $\rho$ increases, more various split functions are tested, leading to greater similarity among trees, which decreases the advantage of ensemble multiple trees. As shown in \cref{fig:q2-fig4}, test accuracy initially increases with higher $\rho$ values until $\rho=10$ and then decreases, as expected. Training and testing time is same as the expectation in \cref{subsec:Q2_1}.
 
-\begin{figure}[htbp]
+\begin{figure}
 	\centering
-	\includegraphics[width=0.8\linewidth]{image/q2-fig4.png}
+	\includegraphics[width=0.55\linewidth]{image/q2-fig4.png}
 	\caption{Training\&Testing accuracy and time according to the randomness parameter}
 	\label{fig:q2-fig4}
 \end{figure}
@@ -64,7 +64,7 @@ We randomly select dimensions and threshold values to create the split function.
 \subsection{Impact of the vocabulary size on classification accuracy}
 We fixed the random forest classification parameters obtained from the previous experiments and varied the K-means vocabulary size. As shown in \cref{fig:q2-fig5}, the vocabulary size used in vector quantization significantly affects both test and train accuracy. As expected, when the value of $K$ is small, because of the insufficient extraction of important features from the images, underfitting occurs, resulting in low training and testing accuracy. Up to $K=16$, train and test accuracy increase rapidly, but beyond that point, the rate of increase for both becomes smaller. Particularly, when $K$ increases from $K=256$ to $K=512$, train accuracy shows a slight improvement, but due to overfitting, test accuracy decreases afterwards. This is because vector quantization extracts unnecessary small details from the images, reducing inner-class vector similarity.
 
-\begin{figure}[htbp]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.4\linewidth]{image/q2-fig5.png}
 	\caption{Training\&Testing accuracy according to the K-means vocabulary size}

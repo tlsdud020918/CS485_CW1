@@ -86,7 +86,7 @@
 
 
 \section{Q3: Optimization process of Random forest vocabulary}
-\label{subsec:Q3-app1}
+\label{subsec:Q2-app3}
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[H]{0.7\linewidth}
@@ -118,5 +118,25 @@
 	\label{fig:q3-fig5}
 \end{figure}
 
+\section{Q3: K-means and Random forest vocabularies' theoretical properties}
+\label{subsec:Q3-app1}
+\begin{table}[htbp]
+	\centering
+	\setlength{\tabcolsep}{6pt} % Adjust column spacing
+	\renewcommand{\arraystretch}{1.5} % Adjust row height
+	\resizebox{0.5\textwidth}{!}{ % Scale table to fit text width
+		\begin{tabular}{|c||c|c|}
+			\hline
+			& K-means & Random forest \\ \hline\hline
+			Training time & 99.50 & $O(ND\rho \times \text{(number of training data)})$ \\ \hline
+			Testing time & 97.80 & $O(ND \times \text{(number of testing data)})$ \\ \hline
+			Space complexity & 100.00 & $O(2^{D} \times N)$ \\ \hline
+		\end{tabular}
+	}
+	\caption{Theoretical properties of vocabulary method: K-means and RF}
+	\label{table:q3-app-1}
+\end{table}
+
 \section{Q3: Difference between K-means and RF vocabularies' quantisation result}
+\label{subsec:Q3-app2}
 
