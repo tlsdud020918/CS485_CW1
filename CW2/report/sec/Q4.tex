@@ -64,9 +64,9 @@ For batch normalization, the larger the batch size, the higher the accuracy. Thi
 
 In image classification, it is important to catch the difference between feature distribution of within and between classes. Using batch normalization, we can consider class distribution since the normalization is performed on a batch basis. However, other methods only do normalization within a single image, the information related to class statistics is weakened. Hence, their accuracy becomes lower than using batch normalization.
 
-\begin{figure}[htbp]
+\begin{figure}
 	\centering
-	\includegraphics[width=0.5\linewidth]{image/q4-3.png}
+	\includegraphics[width=0.4\linewidth]{image/q4-3.png}
 	\caption{Accuracy according to normalization types}
 	\label{fig:normalization}
 \end{figure}
@@ -75,18 +75,20 @@ In image classification, it is important to catch the difference between feature
 There are many method for Generalization of CNN. In this section, we are going to check the impact of drop-out and L2-regularization on weights(which is in Deep\_Learning\_intro Lecture Note pg.84). We test our basic model which has drop-out, the model without drop-out, and the model with L2-regularization on weights. Results are shown in \cref{table:generalization}. The model without drop-out has the lowest accuracy and the model with L2-regularization has the highest accuracy. This is because, drop-out randomly deactivate some neurons, so it helps model to avoid overfitting and be good at generalization. And L2-regularization helps model to avoid overfitting by regulate the size of weights.
 Hence, it is natural result that the model with both drop-out and L2-regularization has the best performance.
 
-\begin{table}[htbp]
+\begin{table}
 	\centering
 	\setlength{\tabcolsep}{6pt}
 	\renewcommand{\arraystretch}{1.5}
-	\begin{tabular}{|c||c|}
-	\hline
-	& accuracy  \\ \hline\hline
-	original & 75.625  \\ \hline
-	without dropout & 68.125  \\ \hline
-	with L2-regularization term & 76.250  \\ \hline
-	\end{tabular}
-        \caption{Impact of generalization}
+	\resizebox{0.5\linewidth}{!}{
+		\begin{tabular}{|c||c|}
+		\hline
+		& accuracy  \\ \hline\hline
+		original & 75.625  \\ \hline
+		without dropout & 68.125  \\ \hline
+		with L2-regularization term & 76.250  \\ \hline
+		\end{tabular}
+	}
+    \caption{Impact of generalization}
 	\label{table:generalization}
 \end{table}
 	
@@ -99,9 +101,9 @@ Using CrossEntropy for the loss function, we get 73.75\% accuracy while we get 8
 \subsection{Compressing CNN}
 We conduct an experiment on compressing layers of CNN using truncated SVD. Our model has 4 fc layers with rank 512, 128, 32, 10, and we compress first two layers with 100(original), 75, 50, 25 percent each because last two layers are too small to compress. The result are shown in \cref{fig:cnn_svd}. Test accuracy and time are both decreased as layers are more compressed. It is because, as weight matrix of layers become compressed, there remain less computation to get the result, but it causes more data loss.
 
-\begin{figure}[htbp]
+\begin{figure}
 	\centering
-	\includegraphics[width=0.5\linewidth]{image/q4-6-svd.png}
+	\includegraphics[width=0.4\linewidth]{image/q4-6-svd.png}
 	\caption{Accuracy and test time using truncated SVD}
 	\label{fig:cnn_svd}
 \end{figure}
@@ -115,7 +117,7 @@ For the batch size, we trained our model with batch size from $2^1$ to $2^6$. An
 
 Lastly, for the number of epochs, we use 75, 100, 125, 200 epochs and compared the result. Results are shown in \cref{fig:q4-7-epoch}. The accuracy is the highest with 100 epochs because when the number of epoch is not enough, it can cause under-fitting while large amount of epochs can cause over-fitting.
 
-\begin{figure}[htbp]
+\begin{figure}
 	\centering
 	\begin{subfigure}{0.23\linewidth}
 		\centering
@@ -152,7 +154,7 @@ Lastly, for the number of epochs, we use 75, 100, 125, 200 epochs and compared t
 In this section, we compare training methods: fine-tuning pre-trained model and training from scratch from random initialization. Since our CNN does not have pre-trained version, we used pre-trained ResNet model(microsoft/resnet-50, trained with ImageNet) and custom it with Caltech101 dataset. Due to the time limit, we only train it with 10 epochs. When we use pre-trained weights and fine-tuned them, we get 99.33\% accuracy. And training from scratch with random initialization, we get 21.33\% accuracy which is lower than before. Based on this result, with the limited amount of time and resources, it is much better to use pre-trained model to get high performance. It is because, since we used pre-trained model with same task(image classification), trained weight is specialized for image classification even with different dataset. Therefore, fine-tuning using a custom dataset can achieve higher accuracy with fewer resources than training from scratch.
 
 \subsection{Comparison with other methods}
-Considering that our CNN have accuracy about 75\%, it is much better model than RF classifier and RF codebook on classifying Caltech101 dataset. (\cref{table:accuracy}) This may because, CNN can learn hierarchical features through layers, so, it can capture various characteristics of images. On the other hand, RF classifier and RF codebook use fixed method for extracting features from images, so they can only learn limited features.
+Considering that our CNN have accuracy about 75\%, it is much better model than RF classifier in Q2 and Q3 as shown in \cref{table:accuracy}. This is because CNN can do end-to-end learning from feature extraction to classification, unlike Q2 and Q3's model. In other words, k-means or random forest vocabulary followed by random forest classification does not allow end-to-end learning, making it difficult to determine whether the vector quantisation result includes beneficial features for classification. However, CNN can automatically learn various meaningful representations directly from raw data.
 
 \begin{table}[htbp]
 	\centering
