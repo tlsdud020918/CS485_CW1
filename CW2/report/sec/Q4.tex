@@ -54,7 +54,7 @@ Lastly, we conduct the experiments on connection between layers. There are three
 \subsection{Batch normalization}
 
 \subsection{Generalization}
-There are many method for Generalization of CNN. In this section, we are going to check the impact of drop-out and L2-regulization on weights(which is in Deep_Learning_intro Lecture Note pg.84) for the generalization.
+There are many method for Generalization of CNN. In this section, we are going to check the impact of drop-out and L2-regulization on weights(which is in Deep\_Learning\_intro Lecture Note pg.84) for the generalization.
 We test our basic model which has drop-out, the basic model without drop-out, and the basic model with L2-regulization on weights.
 Results are shown in \cref{table:generalization}. The model without drop-out has the lowest accuracy and the model with L2-regulization has the highest accuracy. 
 This is because, drop-out randmly deactivate some neurons, so it helps model to avoid overfitting and be good at generalization. And L2-regulization helps model to avoid overfitting by regulize the size of weights.
@@ -71,7 +71,7 @@ Hence, it is natural result that the model with both drop-out and L2-regulizatio
 	& accuracy  \\ \hline\hline
 	original & 75.625  \\ \hline
 	without dropout & 68.125  \\ \hline
-	with L2-regulization & 76.250  \\ \hline
+	with L2-regulization term & 76.250  \\ \hline
 	\end{tabular}
 \end{table}
 	
@@ -149,15 +149,17 @@ On the other hand, RF classifier and RF codebook use fixed method for extracting
 
 \begin{table}[htbp]
 	\centering
-	\setlength{\tabcolsep}{10pt}
-	\renewcommand{\arraystretch}{1.5}
-	\caption{Accuracy of models}
+	\setlength{\tabcolsep}{6pt} % Adjust column spacing
+	\renewcommand{\arraystretch}{1.5} % Adjust row height
+	\resizebox{0.5\textwidth}{!}{ % Scale table to fit text width
+		\begin{tabular}{|c||c|c|}
+			\hline
+			& Train Accuracy (\%) & Test Accuracy (\%) \\ \hline\hline
+			K-means Codebook - RF Classifier & 99.50 & 68.5   \\ \hline
+			RF Codebook - RF Classifier & 97.80 & 60.67  \\ \hline
+			CNN & 100.00 & 75.625  \\ \hline
+		\end{tabular}
+	}
+	\caption{Accuracy of Models}
 	\label{table:accuracy}
-	\begin{tabular}{|c||c|c|}
-	\hline
-	& test accuracy & train accuracy  \\ \hline\hline
-	RF classifier & 86.00 & 56.00   \\ \hline
-	RF codebook & 90.00 & 63.00  \\ \hline
-	CNN & 100.00 & 75.625  \\ \hline
-	\end{tabular}
 \end{table}
