@@ -91,12 +91,19 @@ class CustomCNN(nn.Module):
 
         input_size = 128
         for out_channels in out_channels_list:
-            block = nn.Sequential(
-                nn.Conv2d(in_channels, out_channels, kernel_size=conv_kernel_size, stride=1, padding=1),
-                get_normalization(out_channels, input_size),
-                nn.ReLU(),
-                nn.MaxPool2d(kernel_size=2, stride=2)
-            )
+            if out_channels <= 64:
+                block = nn.Sequential(
+                    nn.Conv2d(in_channels, out_channels, kernel_size=conv_kernel_size, stride=1, padding=1),
+                    nn.ReLU(),
+                    nn.MaxPool2d(kernel_size=2, stride=2)
+                )
+            else:
+                block = nn.Sequential(
+                    nn.Conv2d(in_channels, out_channels, kernel_size=conv_kernel_size, stride=1, padding=1),
+                    get_normalization(out_channels, input_size),
+                    nn.ReLU(),
+                    nn.MaxPool2d(kernel_size=2, stride=2)
+                )
             self.conv_blocks.append(block)
             in_channels = out_channels
             input_size = math.floor((input_size - conv_kernel_size + 2 * 1) / 1 + 1)  # Conv2D
