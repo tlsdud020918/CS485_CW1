@@ -18,10 +18,10 @@ Changing the number of trees and depth, we extracted the result in \cref{fig:q2-
 \end{itemize}
 
 \noindent
-When $N = \text{(number of trees)}$, $D = \text{(depth)}$ and $S = \text{(number of attempts to split per node)}$, the theoretical training/testing time is as follows, and our training time results almost align with theoretical predictions as shown in \cref{fig:q2-fig2}, \cref{fig:q2-fig3}. However, since the testing time is generally more than 10 times shorter than the training time, it is sensitive to noise caused by memory loading time. Unlike our expectations, the testing time graph with respect to the value of $D$ is not seem as linear complexity, due to the influence of noise caused by the exponentially increasing memory with tree depth.
+When $N = \text{(number of trees)}$, $D = \text{(depth)}$ and $\rho = \text{(number of attempts to split per node)}$, the theoretical training/testing time is as follows, and our training time results almost align with theoretical predictions as shown in \cref{fig:q2-fig2}, \cref{fig:q2-fig3}. However, since the testing time is generally more than 10 times shorter than the training time, it is sensitive to noise caused by memory loading time. Unlike our expectations, the testing time graph with respect to the value of $D$ is not seem as linear complexity, due to the influence of noise caused by the exponentially increasing memory with tree depth.
 
 \begin{itemize}
-	\item Training time: $O(NDS)$
+	\item Training time: $O(ND\rho)$
 	\item Testing time: $O(ND)$
 	\item Space complexity (= Number of nodes): $O(N \time 2^{(D-1)})$
 \end{itemize}

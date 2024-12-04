@@ -1,6 +1,6 @@
 hist_dim = 64;
-isTrain = 0;
-load(sprintf("./experiment_data/kmeans_vocab(%d).mat", hist_dim));
+isTrain = 1;
+load(sprintf("./experiment_data/RF_vocab(%d).mat", hist_dim));
 run("vlfeat-0.9.21/toolbox/vl_setup")
 
 if isTrain == 1
@@ -47,9 +47,8 @@ for c = 1:num_classes
             bar(histogram, 'FaceColor', [0.2, 0.6, 0.8]); % Uniform color
             
             % Remove subplot details for compactness
-            axis tight; % Fit axis tightly around the bars
+            %axis tight; % Fit axis tightly around the bars
             xticks([]);
-            yticks([]);
             
             % Add class labels on the leftmost plots
             if i == 1
@@ -65,4 +64,8 @@ for c = 1:num_classes
 end
 
 % Add an overarching title
-sgtitle(sprintf('Test data histograms, vocabulary size=%d', hist_dim), 'FontSize', 14);
+if isTrain == 0
+    sgtitle(sprintf('Test data histograms, vocabulary size=%d', hist_dim), 'FontSize', 14);
+else
+    sgtitle(sprintf('Train data histograms, vocabulary size=%d', hist_dim), 'FontSize', 14);
+end
