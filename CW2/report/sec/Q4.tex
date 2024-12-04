@@ -54,8 +54,16 @@ Lastly, we conduct the experiments on connection between layers. There are three
 \subsection{Batch normalization}
 
 \subsection{Generalization}
+<<<<<<< HEAD
 There are many method for Generalization of CNN. In this section, we are going to check the impact of drop-out and L2-regularization on weights(which is in Deep\_Learning\_intro Lecture Note pg.84) for the generalization.
 We test our basic model which has drop-out, the basic model without drop-out, and the basic model with L2-regularization on weights. Results are shown in \cref{table:generalization}. The model without drop-out has the lowest accuracy and the model with L2-regularization has the highest accuracy. This is because, drop-out randomly deactivate some neurons, so it helps model to avoid over-fitting and be good at generalization. And L2-regularization helps model to avoid over-fitting by regulate the size of weights which improves generalization. Hence, it is natural result that the model with both drop-out and L2-regularization has the best performance.
+=======
+There are many method for Generalization of CNN. In this section, we are going to check the impact of drop-out and L2-regulization on weights(which is in Deep\_Learning\_intro Lecture Note pg.84) for the generalization.
+We test our basic model which has drop-out, the basic model without drop-out, and the basic model with L2-regulization on weights.
+Results are shown in \cref{table:generalization}. The model without drop-out has the lowest accuracy and the model with L2-regulization has the highest accuracy. 
+This is because, drop-out randmly deactivate some neurons, so it helps model to avoid overfitting and be good at generalization. And L2-regulization helps model to avoid overfitting by regulize the size of weights.
+Hence, it is natural result that the model with both drop-out and L2-regulization has the best performance.
+>>>>>>> d260d4bdacf4be76bb6567fa6ef5cb2f43c58cff
 
 \begin{table}[htbp]
 	\centering
@@ -66,7 +74,11 @@ We test our basic model which has drop-out, the basic model without drop-out, an
 	& accuracy  \\ \hline\hline
 	original & 75.625  \\ \hline
 	without dropout & 68.125  \\ \hline
+<<<<<<< HEAD
 	with L2-regularization & 76.250  \\ \hline
+=======
+	with L2-regulization term & 76.250  \\ \hline
+>>>>>>> d260d4bdacf4be76bb6567fa6ef5cb2f43c58cff
 	\end{tabular}
         \caption{Impact of generalization}
 	\label{table:generalization}
@@ -133,6 +145,7 @@ Considering that our CNN have accuracy about 75\%, it is much better model than 
 
 \begin{table}[htbp]
 	\centering
+<<<<<<< HEAD
 	\setlength{\tabcolsep}{10pt}
 	\renewcommand{\arraystretch}{1.5}
 	\begin{tabular}{|c||c|c|}
@@ -143,5 +156,19 @@ Considering that our CNN have accuracy about 75\%, it is much better model than 
 	CNN & 100.00 & 75.625  \\ \hline
 	\end{tabular}
         \caption{Accuracy of models}
+=======
+	\setlength{\tabcolsep}{6pt} % Adjust column spacing
+	\renewcommand{\arraystretch}{1.5} % Adjust row height
+	\resizebox{0.5\textwidth}{!}{ % Scale table to fit text width
+		\begin{tabular}{|c||c|c|}
+			\hline
+			& Train Accuracy (\%) & Test Accuracy (\%) \\ \hline\hline
+			K-means Codebook - RF Classifier & 99.50 & 68.5   \\ \hline
+			RF Codebook - RF Classifier & 97.80 & 60.67  \\ \hline
+			CNN & 100.00 & 75.625  \\ \hline
+		\end{tabular}
+	}
+	\caption{Accuracy of Models}
+>>>>>>> d260d4bdacf4be76bb6567fa6ef5cb2f43c58cff
 	\label{table:accuracy}
 \end{table}

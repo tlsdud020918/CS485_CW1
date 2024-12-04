@@ -15,5 +15,12 @@ Theoretically, a smaller visual vocabulary size $K$ increases the risk of underf
 \end{figure}
 
 \subsection{Vector quantisation process}
- To quantize images, the SIFT feature descriptors extracted from each image were assigned to the nearest vocabulary cluster, and a histogram vector was generated based on the vocabulary frequency of such assigning result. Consequently, after vector quantization, the dimension of each image was reduced to the size of visual vocabulary, denoted by $K$. The visualisation result of those histogram 
+ To quantize images, the SIFT feature descriptors extracted from each image were assigned to the nearest vocabulary cluster, and a histogram vector was generated based on the vocabulary frequency of such assigning result. Consequently, after vector quantization, the dimension of each image was reduced to the size of visual vocabulary, denoted by $K$. The visualisation result of those histogram according to the various word size is visualized on \cref{fig:q1-fig2}. This example also demonstrates the issues of underfitting and overfitting with respect to the size of $K$. When $K=4$, the histogram cosine similarity between 2nd and 3rd image is higher than between 1st and 2nd image. However as the value of $K$ increases, the similarity between 1st and 2nd image which are in same class becomes higher. Additionally, if the value of $K$ becomes excessively large, the inner-class similarity decreases, which can lead to the potential problem of overfitting. Various sample histogram of train and test images and exact measurement of cosine similarity is in \cref{subsec:Q1_histograms} and \cref{subsec:Q1_cossim}
+ 
+ \begin{figure}
+ 	\centering
+ 	\includegraphics[width=0.5\linewidth]{image/q1-fig2.png}
+ 	\caption{K-means visual vocabulary: training and quantization time according to the value of $k$}
+ 	\label{fig:q1-fig2}
+ \end{figure}
  

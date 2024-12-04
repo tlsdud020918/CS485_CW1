@@ -15,7 +15,8 @@ fprintf("Load %s images... \n", message);
 
 if showImg
     figure('Units','normalized','Position',[.05 .1 .4 .9]);
-    suptitle('%s image samples', message);
+    titleText = sprintf("%s image samples", message);
+    suptitle(titleText);
 end
     
 imgIdx_tr = 1:15;
