@@ -1,7 +1,7 @@
 \section{Convolutional Neural Networks}
 \label{sec:intro}
 
-CNNs are strong architecture for computer vision tasks. We are going to explore its performace on image classification.
+CNNs are a strong architecture for computer vision tasks. We are going to explore its performance on image classification.
 
 %-------------------------------------------------------------------------
 \subsection{CNN architecture}
@@ -18,11 +18,11 @@ Also, the input image channel is 3(RGB) and it is amplified up to 256 through co
 Above is our basic model. We tried to choose simplest yet high-performance model. Detailed reasons for our choice will be introduced below.
 
 \subsection{Changing architecture}
-First, the number of layers. We changed the number of layers from 3 to 5. As shown in \cref{fit:q4-2-layers}, the test accuracy of CNN is highest when the number of layers is 4. It may because, when CNN has 3 layers, it is not enough to capture features from images and when it has 5 layers, it may occur over-fitting due to many weights and gradient vanishing. Hence, we concluded that 4 layers are the best choice for the performance.
+First, the number of layers. We changed the number of layers from 3 to 5. As shown in \cref{fig:q4-2-layers}, the test accuracy of CNN is highest when the number of layers is 4. It may because, when CNN has 3 layers, it is not enough to capture features from images and when it has 5 layers, it may occur over-fitting due to many weights and gradient vanishing. Hence, we concluded that 4 layers are the best choice for the performance.
 
-Next, we changed the size of kernel to 3, 5, and 7 to reveal its impact on CNN. As \cref{fig:q4-2-kernel} shows, the accuracy is highest when the kernel size is 3 and it decreases as the kernel size incrases. It is because, when the kernel size is small, it is adequate to capture the details of images and when the size is big, it is good to percieve the global scene. However, as our image has 128*128 size, which is small, kernel size 3 is enough to extract useful feature of the image. other sizes are too big to recognize the features corresponding the image label.
+Next, we changed the size of kernel to 3, 5, and 7 to reveal its impact on CNN. As \cref{fig:q4-2-kernel} shows, the accuracy is highest when the kernel size is 3 and it decreases as the kernel size increases. It is because, when the kernel size is small, it is adequate to capture the details of images and when the size is big, it is good to perceive the global scene. However, as our image has 128*128 size, which is small, kernel size 3 is enough to extract useful feature of the image. other sizes are too big to recognize the features corresponding the image label.
 
-Lastly, we conduct the experiments on connection between layers. There are three cases: no connection between layers, connect every 2 layers, connect every one layers. Since we have total 4 layers, the total number of connection is 0, 2, and 4. The test accuracy are shown in \cref{fig:q4-2-connection}. The accuracy is increases as the number of connection incrases. It is because, the more connection CNN has, the more information it gets. By residual connection, CNN does not lose the information from initial layers thus it can learn more general information about images and its label.
+Lastly, we conduct the experiments on connection between layers. There are three cases: no connection between layers, connect every 2 layers, connect every one layers. Since we have total 4 layers, the total number of connection is 0, 2, and 4. The test accuracy are shown in \cref{fig:q4-2-connection}. The accuracy is increases as the number of connection increases. It is because, the more connection CNN has, the more information it gets. By residual connection, CNN does not lose the information from initial layers thus it can learn more general information about images and its label.
 
 \begin{figure}[htbp]
 	\centering
@@ -54,36 +54,33 @@ Lastly, we conduct the experiments on connection between layers. There are three
 \subsection{Batch normalization}
 
 \subsection{Generalization}
-There are many method for Generalization of CNN. In this section, we are going to check the impact of drop-out and L2-regulization on weights(which is in Deep_Learning_intro Lecture Note pg.84) for the generalization.
-We test our basic model which has drop-out, the basic model without drop-out, and the basic model with L2-regulization on weights.
-Results are shown in \cref{table:generalization}. The model without drop-out has the lowest accuracy and the model with L2-regulization has the highest accuracy. 
-This is because, drop-out randmly deactivate some neurons, so it helps model to avoid overfitting and be good at generalization. And L2-regulization helps model to avoid overfitting by regulize the size of weights.
-Hence, it is natural result that the model with both drop-out and L2-regulization has the best performance.
+There are many method for Generalization of CNN. In this section, we are going to check the impact of drop-out and L2-regularization on weights(which is in Deep\_Learning\_intro Lecture Note pg.84) for the generalization.
+We test our basic model which has drop-out, the basic model without drop-out, and the basic model with L2-regularization on weights. Results are shown in \cref{table:generalization}. The model without drop-out has the lowest accuracy and the model with L2-regularization has the highest accuracy. This is because, drop-out randomly deactivate some neurons, so it helps model to avoid over-fitting and be good at generalization. And L2-regularization helps model to avoid over-fitting by regulate the size of weights which improves generalization. Hence, it is natural result that the model with both drop-out and L2-regularization has the best performance.
 
 \begin{table}[htbp]
 	\centering
 	\setlength{\tabcolsep}{10pt}
 	\renewcommand{\arraystretch}{1.5}
-	\caption{Impact of generalization}
-	\label{table:generalization}
 	\begin{tabular}{|c||c|}
 	\hline
 	& accuracy  \\ \hline\hline
 	original & 75.625  \\ \hline
 	without dropout & 68.125  \\ \hline
-	with L2-regulization & 76.250  \\ \hline
+	with L2-regularization & 76.250  \\ \hline
 	\end{tabular}
+        \caption{Impact of generalization}
+	\label{table:generalization}
 \end{table}
 	
 
 \subsection{Loss function}
 We use CrossEntropy, which is based on softmax function, as a loss function as usual. And compare it with SquaredHinge loss.
 
-Using CrossEntropy for the loss function, we get 73.75 accuracy. However, when we use SquaredHinge loss, we get 80.00 accuracy. The accuracy with SquaredHinge loss is higher. This is because, as CrossEntropy is based on probability distribution and SquaredHinge loss is based on the margein between expected and real classes, SquaredHinge is better since our dataset is small. (which has only 10 classes) Because the dataset is small, it is hard to make an accurate probability distribution due to the law of large numbers. Hence, it is better to use direct borders and margins between classes.
+Using CrossEntropy for the loss function, we get 73.75\% accuracy. However, when we use SquaredHinge loss, we get 80.00\% accuracy. The accuracy with SquaredHinge loss is higher. This is because, as CrossEntropy is based on probability distribution and SquaredHinge loss is based on the margin between expected and real classes, SquaredHinge is better since our dataset is small. (which has only 10 classes) Because the dataset is small, it is hard to make an accurate probability distribution due to the law of large numbers. Hence, it is better to use direct borders and margins between classes.
 Despite this reason, we adopted CrossEntropy as a basic loss function as it is widely used.
 
 \subsection{Compressing CNN}
-We conduct an experiment on compressing layers of CNN using truncated SVD. Since our model has 4 layers with rank 512, 128, 32, 10, we compress first two layers with 100(original), 75, 50, 25 percent each because last two layers are too small to compress, thus it might be cause the huge loss of data when they are compressed. The experiment result are shown in \cref{fig:cnn_svd}. Test accuracy and test time are both decrased as layers are more compressed. It is because, as weight matrix of layers become compressed, there remain less computation to get the result, so, the test time decrased. However, as the matrix is more compressed, it causes more data loss than the original weight matrix.
+We conduct an experiment on compressing layers of CNN using truncated SVD. Since our model has 4 layers with rank 512, 128, 32, 10, we compress first two layers with 100(original), 75, 50, 25 percent each because last two layers are too small to compress, thus it might be cause the huge loss of data when they are compressed. The experiment result are shown in \cref{fig:cnn_svd}. Test accuracy and test time are both decreased as layers are more compressed. It is because, as weight matrix of layers become compressed, there remain less computation to get the result, so, the test time decreased. However, as the matrix is more compressed, it causes more data loss than the original weight matrix.
 
 \begin{figure}[htbp]
 	\centering
@@ -93,11 +90,7 @@ We conduct an experiment on compressing layers of CNN using truncated SVD. Since
 \end{figure}
 
 \subsection{Changing parameters}
-We observe the influence of main hyper-parameters by experiments. We changed 3 parameters from base model: learning rate, batch size, and the numger of epochs.
-\cref{fig:q4-7-lr-train} and \cref{fig:q4-7-lr} indicates the result of varying learning rate. We changed learning rate to 0.00001, 0.0001, 0.0005, and 0.005. As shown in pictures, when the learning rate is 0.00001, the model doesn't converge sufficiently since it is too small, thus it can not reach the local minimum of loss during the given epochs.
-Conversly, when the learning rate is 0.0005 and 0.001, it vibrates too much until it reaches the convergence point. More specifically, amplitude of 0.001 is larger than 0.0005. This is because, the amount of moving is too big, so, the model oscillates near the local minimum largly.
-Therfore, we decided that learning rate = 0.0001 is the best for our model.
-Also, regarding the accuracy, the accuracy is higher when the learning rate is 0.0001 and less than this when the learning rate is smaller or bigger than 0.0001. It is because, if the learning rate is too small like 0.00001, it can not converge in the training time sufficiently. And if the learning rate is too big, it might pass through optimization point.
+We observe the influence of main hyper-parameters by experiments. We changed 3 parameters from base model: learning rate, batch size, and the number of epochs. \cref{fig:q4-7-lr-train} and \cref{fig:q4-7-lr} indicates the result of varying learning rate. We changed learning rate to 0.00001, 0.0001, 0.0005, and 0.005. As shown in pictures, when the learning rate is 0.00001, the model doesn't converge sufficiently since it is too small, thus it can not reach the local minimum of loss during the given epochs. Conversely, when the learning rate is 0.0005 and 0.001, it vibrates too much until it reaches the convergence point. More specifically, amplitude of 0.001 is larger than 0.0005. This is because, the amount of moving is too big, so, the model oscillates near the local minimum largely. Therefore, we decided that learning rate = 0.0001 is the best for our model. Also, regarding the accuracy, the accuracy is higher when the learning rate is 0.0001 and less than this when the learning rate is smaller or bigger than 0.0001. It is because, if the learning rate is too small like 0.00001, it can not converge in the training time sufficiently. And if the learning rate is too big, it might pass through optimization point.
 
 \begin{figure}[htbp]
 	\centering
@@ -133,26 +126,15 @@ Also, regarding the accuracy, the accuracy is higher when the learning rate is 0
 \end{figure}
 
 \subsection{Pre-trained model}
-In this section, we compare training methods: fine-tuning pre-trained model and training from scratch from random initialization.
-Since our CNN does not have pre-trained version because we have only one dataset for both training and test, we used pre-trained ResNet model(microsoft/resnet-50, trained with ImageNet) and custom it with our Caltech101 dataset.
-Due to the time limit, we only train it with 10 epochs.
-When we use pre-trained weights and fine-tuning them, we get 0.9933 accuracy.
-And when we train the model from scratch, we get 0.2133 accuracy which is lower than before.
-Based on this result, with the limited amount of time and resources, it is much better to use pre-trained model to get high performance.
-It may because, since we used pre-trained model with same task(image classification), trained weight is specialized for image classification even with different dataset.
-Therefore, fine-tuning using a custom dataset can achieve higher accuracy with fewer training epochs than train from scratch.
+In this section, we compare training methods: fine-tuning pre-trained model and training from scratch from random initialization. Since our CNN does not have pre-trained version because we have only one dataset for both training and test, we used pre-trained ResNet model(microsoft/resnet-50, trained with ImageNet) and custom it with our Caltech101 dataset. Due to the time limit, we only train it with 10 epochs. When we use pre-trained weights and fine-tuning them, we get 0.9933\% accuracy. And when we train the model from scratch, we get 0.2133\% accuracy which is lower than before. Based on this result, with the limited amount of time and resources, it is much better to use pre-trained model to get high performance. It may because, since we used pre-trained model with same task(image classification), trained weight is specialized for image classification even with different dataset. Therefore, fine-tuning using a custom dataset can achieve higher accuracy with fewer training epochs than train from scratch.
 
-\subsection{Comparison with our methods}
-Considering that our CNN have accuracy about 75, it is much better model than RF classifier and RF codebook on classifying Caltech101 dataset. \cref{table:accuracy}
-This may because, CNN can learn hierarchical features through layers, so, it can capture various characteristics of images.
-On the other hand, RF classifier and RF codebook use fixed method for extracting features from images, so they can only learn limited features.
+\subsection{Comparison with other methods}
+Considering that our CNN have accuracy about 75\%, it is much better model than RF classifier and RF codebook on classifying Caltech101 dataset. (\cref{table:accuracy}) This may because, CNN can learn hierarchical features through layers, so, it can capture various characteristics of images. On the other hand, RF classifier and RF codebook use fixed method for extracting features from images, so they can only learn limited features.
 
 \begin{table}[htbp]
 	\centering
 	\setlength{\tabcolsep}{10pt}
 	\renewcommand{\arraystretch}{1.5}
-	\caption{Accuracy of models}
-	\label{table:accuracy}
 	\begin{tabular}{|c||c|c|}
 	\hline
 	& test accuracy & train accuracy  \\ \hline\hline
@@ -160,4 +142,6 @@ On the other hand, RF classifier and RF codebook use fixed method for extracting
 	RF codebook & 90.00 & 63.00  \\ \hline
 	CNN & 100.00 & 75.625  \\ \hline
 	\end{tabular}
+        \caption{Accuracy of models}
+	\label{table:accuracy}
 \end{table}
