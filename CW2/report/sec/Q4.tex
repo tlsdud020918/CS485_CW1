@@ -109,7 +109,7 @@ We observe the effect of 3 main hyperparameters: learning rate, batch size, and 
 
 We trained our model with batch sizes ranging from $2^1$ to $2^6$ and achieved the highest accuracy with a batch size of 16 as in \cref{fig:q4-7-batch}. With small batch sizes, the model learns feature distributions from a limited amount of data, leading to noisy gradient and less smooth converging. However, such noise can allow the model to explore the loss landscape more broadly, helping generalization. This might help the optimizer avoid getting stuck in local minima or saddle points. Therefore, our optimal batch size was 16 because of such tradeoff. In general, we can conclude that using mini-batch rather than whole-data gradient can reduce the training time and offers better monitoring progress.
 
-For the number of epochs, results are shown in \cref{fig:q4-7-epoch}. The accuracy is the highest with 100 epochs because when the number of epoch is not enough, it can cause under-fitting.
+For the number of epochs, results are shown in \cref{fig:q4-7-epoch}. The accuracy is the highest with 100 epochs because when the number of epoch is not enough, it can cause under-fitting and if there is too much epoch, it can cause over-fitting.
 
 \begin{figure}
 	\centering
