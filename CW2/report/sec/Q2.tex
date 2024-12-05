@@ -1,11 +1,11 @@
 \section{RF classifier}
 \label{sec:intro_q2}
 
-The random forest model has several key hyperparameters, and testing them all simultaneously would require excessive effort and time. Therefore, we fixed the optimal parameters in the sequence described below. Also, to ensure result stability, each test was executed 10 times. The average of 10 results displayed in a graph, and all the confusion matrix represents the best result among those. All training and testing time was measured excluding the codebook generation and vector quantization time; in other words, only the time spent on random forest classification applied on the 256-dimension quantized vectors was measured.
+The random forest model has several key hyperparameters, so we fixed the optimal parameters in the sequence described below. Also, to ensure result stability, each test was executed 10 times. The average of 10 results displayed in a graph, and all the confusion matrix represents the best result among those. All training and testing time was measured excluding the codebook generation and vector quantization time; in other words, only the time spent on random forest classification applied on the 256-dimension quantized vectors was measured.
 \begin{enumerate}
 	\item Number of Trees \& Tree Depth: We tested using an axis-aligned weak learner with the split number fixed at 10.
-	\item Split Number (Randomness Parameter): Using the optimal number of trees\&tree depth derived in step 1 and axis-aligned weak learner.
-	\item Type of Weak Learner: Using the optimal values for other parameters determined in steps 1 and 2, we tested different weak learners.
+	\item Split Number (Randomness Parameter): Optimal number of trees\&tree depth derived in step 1 and axis-aligned weak learner.
+	\item Type of Weak Learner: Optimal values for other parameters determined in steps 1 and 2.
 \end{enumerate}
 
 %-------------------------------------------------------------------------
@@ -13,12 +13,12 @@ The random forest model has several key hyperparameters, and testing them all si
 \label{subsec:Q2_1}
 Changing the number of trees and depth, we extracted the result in \cref{fig:q2-fig1}. In the graph, the best accuracy 0.685 occurred at $N \text{(number of trees)} = 250$ and $D\text{ (depth)}=8$, explained as follows:
 \begin{itemize}
-	\item Number of Trees: A single tree in random forests tends to overfit to data; therefore, we can generalize the model using ensembles of trees. As shown in \cref{fig:q2-fig2}, the test accuracy converges near $N=250$, which is selected as optimal parameter.
-	\item Tree Depth: When depth is $D$, maximum of $2^D-1$ nodes are generated. As shown in \cref{fig:q2-fig3}, for a given $N$, test accuracy initially increases with tree depth but later decreases due to overfitting. Notably, the optimal depth $D$ increases with $N$, indicating that a larger $N$ result in less overfitting.
+	\item Number of Trees: A single tree in random forests too weak for classification; therefore, we can improve model through ensembling. As shown in \cref{fig:q2-fig2}, the test accuracy converges near $N=250$, which is selected as optimal parameter.
+	\item Tree Depth: As shown in \cref{fig:q2-fig3}, for a given $N$, test accuracy initially increases with tree depth but later decreases due to overfitting. Notably, the optimal depth $D$ increases with $N$, indicating that larger $N$ usually result in better generalization.
 \end{itemize}
 
 \noindent
-When $N = \text{(number of trees)}$, $D = \text{(depth)}$ and $\rho = \text{(number of attempts to split per node)}$, the theoretical training/testing time is as below, and our training time results almost align with theoretical predictions as shown in \cref{fig:q2-fig2}, \cref{fig:q2-fig3}. However, since the testing time is generally more than 10 times shorter than the training time, it is sensitive to noise caused by memory loading time. Unlike our expectations, the testing time graph with respect to the value of $D$ is not seem as linear complexity, due to the influence of noise caused by the exponentially increasing memory with tree depth.
+Given $N$ (number of trees), $D$ (tree depth), and $\rho$ (number of split attempts per node), the theoretical complexity is derived as follows. Our training time results closely align with these predictions, as shown in \cref{fig:q2-fig2} and \cref{fig:q2-fig3}. However, testing time—typically over 10 times shorter than training time—is more sensitive to noise from memory loading. Contrary to expectations, the testing time graph with respect to $D$ does not seems like linear complexity. This deviation might arise from noise introduced by the exponentially increasing memory usage as tree depth grows.
 
 \begin{itemize}
 	\item Training time: $O(ND\rho \times \text{number of training data})$
@@ -52,7 +52,7 @@ When $N = \text{(number of trees)}$, $D = \text{(depth)}$ and $\rho = \text{(num
 Moreover, our code do not utilize parallelization of each tree's growth. Based on theoretical insights from course materials, training each tree in parallel could reduce the time complexity from $O(N)$ to $O(1)$ with respect to the number of trees.
 
 \subsection{Randomness parameter}
-We randomly select dimensions and threshold values to create the split function. For each split function, we attempt $\rho$ random splits and choose the one with highest information gain. There is a trade-off in the magnitude of $\rho$ value: If the $\rho$ value is too low, fewer splits are attempted, which reduces similarity between trees but increases the risk of less-optimal split. Conversely, as $\rho$ increases, more various split functions are tested, leading to greater similarity among trees, which decreases the advantage of ensemble multiple trees. As shown in \cref{fig:q2-fig4}, test accuracy initially increases with higher $\rho$ values until $\rho=10$ and then decreases, as expected. Training and testing time is same as the expectation in \cref{subsec:Q2_1}.
+We randomly select dimensions and threshold values to create the split function. For each split function, we attempt $\rho$ random splits and choose the one with highest information gain. There is a trade-off in the magnitude of $\rho$ value: If the $\rho$ value is too low, fewer splits are attempted, reducing similarity between trees but increasing the risk of less-optimal split. Conversely, as $\rho$ increases, more split functions are tested, leading to greater similarity among trees, which decreases the advantage of ensemble multiple trees. As shown in \cref{fig:q2-fig4}, test accuracy initially increases with higher $\rho$ values until $\rho=10$ and then decreases, as expected. Training and testing time is same as the expectation in \cref{subsec:Q2_1}.
 
 \begin{figure}
 	\centering
