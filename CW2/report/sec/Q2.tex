@@ -62,7 +62,7 @@ We randomly select dimensions and threshold values to create the split function.
 \end{figure}
 
 \subsection{Impact of the vocabulary size on classification accuracy}
-We fixed the random forest classification parameters obtained from the previous experiments and varied the K-means vocabulary size. As shown in \cref{fig:q2-fig5}, the vocabulary size used in vector quantization significantly affects both test and train accuracy. As expected, when the value of $K$ is small, because of the insufficient extraction of important features from the images, underfitting occurs, resulting in low training and testing accuracy. Up to $K=16$, train and test accuracy increase rapidly, but beyond that point, the rate of increase for both becomes smaller. Particularly, when $K$ increases from $K=256$ to $K=512$, train accuracy shows a slight improvement, but due to overfitting, test accuracy decreases afterwards. This is because vector quantization extracts unnecessary small details from the images, reducing inner-class vector similarity.
+We varied the K-means vocabulary size while keeping the random forest classification parameters fixed. As shown in \cref{fig:q2-fig5}, the vocabulary size in vector quantization significantly impacts both training and testing accuracy. For small $K$, insufficient feature extraction leads to underfitting, resulting in low accuracy. Both training and testing accuracy improves rapidly up to $K=16$, but the rate of increase diminishes beyond this point. Notably, as $K$ increases from 256 to 512, training accuracy slightly improves, but testing accuracy declines. This might occur because vector quantization begins to capture unnecessary small details, reducing inner-class vector similarity.
 
 \begin{figure}
 	\centering
