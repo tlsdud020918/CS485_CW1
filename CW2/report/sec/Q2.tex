@@ -1,5 +1,5 @@
 \section{RF classifier}
-\label{sec:intro}
+\label{sec:intro_q2}
 
 The random forest model has several key hyperparameters, and testing them all simultaneously would require excessive effort and time. Therefore, we fixed the optimal parameters in the sequence described below. Also, to ensure result stability, each test was executed 10 times. The average of 10 results displayed in a graph, and all the confusion matrix represents the best result among those. All training and testing time was measured excluding the codebook generation and vector quantization time; in other words, only the time spent on random forest classification applied on the 256-dimension quantized vectors was measured.
 \begin{enumerate}
