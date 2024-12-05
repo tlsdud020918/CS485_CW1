@@ -137,6 +137,43 @@ Also, you can see the example success and failure cases of random forest codeboo
 
 \section{Q2: Visualization of random forest's information gain process}
 \label{subsec:Q2-app2}
+Random forests utilize the entropy-based information gain method to reduce the diversity of classes within the nodes as they move down to the lower nodes. To illustrate the execution of this algorithm in our code, we have traced the path down the left child nodes of a single tree and represented the results in the histograms below. Each histogram corresponds to the left node of the previous figure, and the result \cref{fig:app-q2-infgain} align with our expectations.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q2-infgain/fig1.png}
+		\caption{Top node (depth=1)}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q2-infgain/fig2.png}
+		\caption{depth=2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q2-infgain/fig3.png}
+		\caption{depth=3}
+	\end{subfigure}
+	
+	\vspace{0.5cm} % Optional vertical space
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q2-infgain/fig4.png}
+		\caption{depth=4}
+	\end{subfigure}
+	\hspace{0.5cm} % Optional space between images
+	\begin{subfigure}{0.33\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{image/q2-infgain/fig5.png}
+		\caption{depth=5}
+	\end{subfigure}
+	\caption{Visualization of random forest's information gain process}
+	\label{fig:app-q2-infgain}
+\end{figure}
 
 
 \section{Q3: Optimization process of Random forest vocabulary}
